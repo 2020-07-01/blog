@@ -1,11 +1,17 @@
 package com.example.blog.controller;
 
-import com.example.blog.eneity.User;
+import com.example.blog.entity.Article;
+import com.example.blog.entity.User;
+import com.example.blog.service.ArticleService;
 import com.example.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.jws.WebParam;
+import java.util.List;
 
 
 /**
@@ -21,13 +27,20 @@ public class UserController {
     @Autowired
     UserService userService;
 
+
+    @Autowired
+    ArticleService articleService;
+
     /**
      * 后台主页
      *
      * @return
      */
     @RequestMapping(value = "")
-    public String admin() {
+    public String admin(Model model) {
+        //查询所有的博客信息在页面进行显示
+        List<Article> list = articleService.selectAll();
+        model.addAttribute("article", list);
         return "admin/index";
     }
 
@@ -46,20 +59,27 @@ public class UserController {
      * 登陆验证模块，验证成功后跳转至后台主页,否则跳转到登陆界面
      *
      * @param user
-     * @param model
      * @return
      */
-    @RequestMapping(value = "/doLogin")
-    public String doLogin(User user, Model model) {
+    @RequestMapping(value = "/dologin", method = RequestMethod.POST)
+    public String doLogin(User user) {
         //如果可以获取到用户名和密码则成功否则失败
         if (userService.getUSer(user.getUserName(), user.getUserPassword())) {
-
             return "redirect:/admin";
         } else {
             return "admin/login";
         }
-
     }
 
+    /**
+     * 跳转至
+     *
+     * @return
+     */
+    @RequestMapping(value = "/write")
+    public String write() {
+        return "admin/write";
+    }
 
 }
+

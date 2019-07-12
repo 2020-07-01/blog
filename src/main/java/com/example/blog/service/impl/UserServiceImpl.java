@@ -1,12 +1,10 @@
 package com.example.blog.service.impl;
 
 import com.example.blog.dao.UserDao;
-import com.example.blog.eneity.User;
+import com.example.blog.entity.User;
 import com.example.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.xml.ws.ServiceMode;
 
 /**
  * @author :qiang

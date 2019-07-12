@@ -4,4 +4,16 @@
 
 <mapper namespace="com.example.blog.dao.UserDao">
 
+    <sql id="base_sql">
+        id,user_name,user_password
+    </sql>
+
+
+    <select id="selectUserByNP" resultType="com.example.blog.entity.User">
+        select
+        <include refid="base_sql"/>
+        from user
+        where user_name = #{userName} and user_password = #{userPassword}
+    </select>
+
 </mapper>

@@ -1,4 +1,4 @@
-package com.example.blog.eneity;
+package com.example.blog.entity;
 
 /**
  * @author :qiang

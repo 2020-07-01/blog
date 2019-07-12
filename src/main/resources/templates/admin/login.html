@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN">
 <head>
 
     <meta charset="utf-8"/>
@@ -9,29 +9,25 @@
     <title>登陆首页</title>
 
     <!--引入bootstrap和jquery-->
-    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
-    <link th:href="@{/bootstrap/css/bootstrap-theme.css}" rel="stylesheet"/>
-    <link th:href="@{/css/signin.css}" rel="stylesheet"/>
-    <script th:href="@{/bootstrap/js/bootstrap.js}"></script>
-    <script th:href="@{/jquery-3.4.1.min.js}" type="text/javascript"></script>
+    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+    <link href="/bootstrap/css/bootstrap-theme.css " rel="stylesheet"/>
+    <link href="/css/signin.css" rel="stylesheet"/>
+    <script href="/bootstrap/js/bootstrap.js "></script>
+    <script href="/jquery-3.4.1.min.js " type="text/javascript"></script>
 
 </head>
 <body>
 <div class="container">
 
-    <!---->
-    <form class="form-signin" action="/blog/admin/dologin" method="post">
+    <!--用户信息表单-->
+    <form class="form-signin" action="/admin/dologin" method="post">
         <h2 class="form-signin-heading">请登录</h2>
 
-        <!-- <div th:if="${error}">
-             <div th:text="${error}" style="color:#F00"></div>
-         </div>-->
-
         <label for="inputEmail" class="sr-only">请输入用户名</label>
-        <input type="text" id="inputEmail" name="username" class="form-control" placeholder="用户名" required autofocus>
+        <input type="text" id="inputEmail" name="userName" class="form-control" placeholder="用户名" required autofocus>
 
         <label for="inputPassword" class="sr-only">密码</label>
-        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="密码" required>
+        <input type="password" id="inputPassword" name="UserPassword" class="form-control" placeholder="密码" required>
 
         <div class="checkbox">
             <label>
