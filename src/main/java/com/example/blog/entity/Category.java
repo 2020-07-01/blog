@@ -15,9 +15,8 @@ public class Category {
     /*
      * 类别名称
      */
-    private String catagoryName;
+    private String categoryName;
 
-    private String displayName;
 
     public String getId() {
         return id;
@@ -27,19 +26,20 @@ public class Category {
         this.id = id;
     }
 
-    public String getCatagoryName() {
-        return catagoryName;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCatagoryName(String catagoryName) {
-        this.catagoryName = catagoryName;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public String getDisplayName() {
-        return displayName;
-    }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id='" + id + '\'' +
+                ", categoryName='" + categoryName + '\'' +
+                '}';
     }
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.example.blog.dao.ArticleDao">
+
+    <!--sql语句-->
+    <sql id="base_sql">
+        id,title,content,category,summary,create_date
+    </sql>
+
+    <!--结果映射-->
+    <resultMap id="resultMap" type="com.example.blog.entity.Article">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="summary" property="summary" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="VARCHAR"/>
+
+        <!--此处使用连表查询,进行结果结果集的影射-->
+        <association property="category" javaType="com.example.blog.entity.Category">
+            <id column="id" property="id" jdbcType="VARCHAR"/>
+            <result column="category_name" property="category" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+
+    <!--查询所有的博客-->
+    <select id="selectAll" resultMap="resultMap">
+        select
+        <include refid="base_sql"/>
+        from article
+    </select>
+
+</mapper>

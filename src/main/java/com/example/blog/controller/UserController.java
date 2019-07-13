@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.jws.WebParam;
 import java.util.List;
 
 
@@ -23,6 +22,7 @@ import java.util.List;
 @RequestMapping(value = "/admin")
 @Controller
 public class UserController {
+
 
     @Autowired
     UserService userService;
@@ -38,9 +38,13 @@ public class UserController {
      */
     @RequestMapping(value = "")
     public String admin(Model model) {
+
         //查询所有的博客信息在页面进行显示
         List<Article> list = articleService.selectAll();
-        model.addAttribute("article", list);
+        for (Article item : list) {
+            System.out.println(item.toString());
+        }
+        model.addAttribute("articles", list);
         return "admin/index";
     }
 

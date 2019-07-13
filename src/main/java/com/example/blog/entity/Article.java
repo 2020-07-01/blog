@@ -26,7 +26,7 @@ public class Article {
     /*
      * 博客类别
      */
-    private Category catagory;
+    private Category category;
 
     /*
      * 博客摘要:默认取前40个字
@@ -36,7 +36,7 @@ public class Article {
     /*
      * 创建时间：由系统生成
      */
-    private String creataData;
+    private String createDate;
 
 
     public String getId() {
@@ -63,12 +63,12 @@ public class Article {
         this.content = content;
     }
 
-    public Category getCatagory() {
-        return catagory;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCatagory(Category catagory) {
-        this.catagory = catagory;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getSummary() {
@@ -79,12 +79,12 @@ public class Article {
         this.summary = summary;
     }
 
-    public String getCreataData() {
-        return creataData;
+    public String getCreateDate() {
+        return createDate;
     }
 
-    public void setCreataData(String creataData) {
-        this.creataData = creataData;
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
     }
 
     @Override
@@ -93,9 +93,9 @@ public class Article {
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", catagory=" + catagory +
+                ", category=" + category +
                 ", summary='" + summary + '\'' +
-                ", creataData='" + creataData + '\'' +
+                ", createDate='" + createDate + '\'' +
                 '}';
     }
 }
