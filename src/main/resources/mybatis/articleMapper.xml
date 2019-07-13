@@ -21,6 +21,7 @@
         <association property="category" javaType="com.example.blog.entity.Category">
             <id column="id" property="id" jdbcType="VARCHAR"/>
             <result column="category_name" property="category" jdbcType="VARCHAR"/>
+            <result column="display_name" property="displayName" jdbcType="VARCHAR"/>
         </association>
     </resultMap>
 
@@ -29,6 +30,19 @@
         select
         <include refid="base_sql"/>
         from article
+    </select>
+
+    <!--根据id删除博客-->
+    <delete id="deleteBlog">
+        delete from article where id = #{id}
+    </delete>
+
+
+    <select id="selectById" parameterType="String" resultMap="resultMap">
+        select
+        <include refid="base_sql"/>
+        from article
+        where id = #{id};
     </select>
 
 </mapper>

@@ -12,10 +12,21 @@ public class Category {
      */
     private String id;
 
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
     /*
      * 类别名称
      */
     private String categoryName;
+
+
+    private String displayName;
 
 
     public String getId() {
@@ -34,12 +45,12 @@ public class Category {
         this.categoryName = categoryName;
     }
 
-
     @Override
     public String toString() {
         return "Category{" +
                 "id='" + id + '\'' +
                 ", categoryName='" + categoryName + '\'' +
+                ", displayName='" + displayName + '\'' +
                 '}';
     }
 }

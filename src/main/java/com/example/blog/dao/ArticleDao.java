@@ -10,4 +10,13 @@ public interface ArticleDao {
 
     //查询所有的博客
     List<Article> selectAll();
+
+    //删除博客
+    int deleteBlog(String id);
+
+    //修改博客
+    int updateBlog(Article article);
+
+    //根基id查询博客
+    Article selectById(String id);
 }

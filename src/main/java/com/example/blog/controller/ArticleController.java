@@ -14,5 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ArticleController {
 
 
+    @RequestMapping(value = "/get")
+    public String get() {
+        //Model model, @PathVariable(name = "id") String id
+        return "front/index";
+    }
+
 
 }

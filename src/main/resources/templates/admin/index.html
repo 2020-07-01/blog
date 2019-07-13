@@ -16,6 +16,17 @@
 
 <body>
 
+<!--删除博客提示信息-->
+<script type="text/javascript">
+    function del() {
+        if (confirm("您确定要删除吗？")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+
 <div class="container">
     <div class="panel panel-default">
         <!-- Default panel contents -->
@@ -38,9 +49,8 @@
                 <td th:text="${article.title}"></td>
                 <td th:text="${article.summary}"></td>
                 <td th:text="${article.createDate}"></td>
-
-                <td><a th:href="@{'/admin/update/'+${article.id}}">修改</a></td>
-                <td><a th:href="@{'/admin/delete/'+${article.id}}">删除</a></td>
+                <td><a th:href="@{/admin/update/(id = ${article.id})}">修改</a></td>
+                <td><a onclick="del()" th:href="@{/admin/delete/(id = ${article.id})}">删除</a></td>
             </tr>
         </table>
     </div>
