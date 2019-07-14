@@ -4,6 +4,7 @@ import com.example.blog.entity.Article;
 import com.example.blog.entity.Category;
 import com.example.blog.entity.User;
 import com.example.blog.service.ArticleService;
+import com.example.blog.service.CategoryService;
 import com.example.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-
+import java.util.UUID;
 
 /**
  * @author :qiang
@@ -29,9 +30,11 @@ public class UserController {
     @Autowired
     UserService userService;
 
-
     @Autowired
     ArticleService articleService;
+
+    @Autowired
+    CategoryService categoryService;
 
     /**
      * 后台主页
@@ -40,12 +43,8 @@ public class UserController {
      */
     @RequestMapping(value = "")
     public String admin(Model model) {
-
         //查询所有的博客信息在页面进行显示
         List<Article> list = articleService.selectAll();
-       /* for (Article item : list) {
-            System.out.println(item.toString());
-        }*/
         model.addAttribute("articles", list);
         return "admin/index";
     }
@@ -82,7 +81,12 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/write")
-    public String write() {
+    public String write(Model model) {
+
+        //查询所有的类别信息传送到前端
+        List<Category> categories = categoryService.selectAll();
+        model.addAttribute("categories", categories);
+        model.addAttribute("article", new Article());
         return "admin/write";
     }
 
@@ -100,6 +104,7 @@ public class UserController {
         return "redirect:/admin";
     }
 
+
     @RequestMapping(value = "/update")
     public String updateBlog(Model model) {
         //根据id查询博客@RequestParam("id") String id,Model model
@@ -112,6 +117,13 @@ public class UserController {
 
     }
 
+    @RequestMapping(value = "/save")
+    public String save(Article article) {
+        //保存博客信息
+        articleService.saveBlog(article);
+
+        return "redirect:";
+    }
 
 }
 

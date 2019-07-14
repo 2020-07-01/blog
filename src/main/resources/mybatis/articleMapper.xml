@@ -6,12 +6,12 @@
 
     <!--sql语句-->
     <sql id="base_sql">
-        id,title,content,category,summary,create_date
+        a_id,title,content,category,summary,create_date
     </sql>
 
     <!--结果映射-->
     <resultMap id="resultMap" type="com.example.blog.entity.Article">
-        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <id column="a_id" property="aId" jdbcType="VARCHAR"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
         <result column="summary" property="summary" jdbcType="VARCHAR"/>
@@ -19,8 +19,8 @@
 
         <!--此处使用连表查询,进行结果结果集的影射-->
         <association property="category" javaType="com.example.blog.entity.Category">
-            <id column="id" property="id" jdbcType="VARCHAR"/>
-            <result column="category_name" property="category" jdbcType="VARCHAR"/>
+            <id column="c_id" property="cId" jdbcType="VARCHAR"/>
+            <result column="category_name" property="categoryName" jdbcType="VARCHAR"/>
             <result column="display_name" property="displayName" jdbcType="VARCHAR"/>
         </association>
     </resultMap>
@@ -34,15 +34,24 @@
 
     <!--根据id删除博客-->
     <delete id="deleteBlog">
-        delete from article where id = #{id}
+        delete from article where a_id = #{aId}
     </delete>
 
 
+    <!--根据id查询博客-->
     <select id="selectById" parameterType="String" resultMap="resultMap">
         select
         <include refid="base_sql"/>
         from article
-        where id = #{id};
+        where a_id = #{aId};
     </select>
+
+
+    <!--保存博客-->
+    <insert id="saveBlog" parameterType="com.example.blog.entity.Article">
+        insert into article (a_id,title,content,category,summary,create_date)
+        values (#{aId},#{title},#{content},#{category.categoryName},#{summary},#{createDate})
+
+    </insert>
 
 </mapper>

@@ -18,4 +18,7 @@ public interface ArticleService {
 
     //根据id查询博客
     Article selectById(String id);
+
+    //保存博客信息
+    int saveBlog(Article article);
 }

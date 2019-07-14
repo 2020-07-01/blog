@@ -2,12 +2,13 @@
 <!--
     界面的头部分，在每个界面中通过th:include标签进行调取
 -->
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:margin-down="http://www.w3.org/1999/xhtml">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:margin-down="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
     <title>首页</title>
     <script href="@{/jquery-3.4.1.min.js}" type="text/javascript"></script>
     <script href="@{/bootstrap/js/bootstrap.js}"></script>
@@ -17,7 +18,9 @@
 </head>
 
 <body>
+
 <div th:fragment="top">
+
     <div class="row">
         <nav class="navbar navbar-inverse">
             <div class="container">
@@ -35,13 +38,14 @@
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav" id="nv1">
-                        <li class="active" id="firstPage"><a th:href=“@{/article/}”>首页</a></li>
+                        <li class="active" id="firstPage"><a th:href="@{/article/}">首页</a></li>
                         <li id="javaPage"><a th:href="@{/article/column/Java专栏/javaPage}">Java专栏</a></li>
                         <li id="springPage"><a th:href="@{/article/column/Spring专栏/springPage}">Spring专栏</a></li>
                         <li id="jsPage"><a th:href="@{/article/column/数据结构专栏/jsPage}">Js专栏</a></li>
                         <li id="algorPage"><a th:href="@{/article/column/算法专栏/algorPage}">算法专栏</a></li>
                     </ul>
                     <form class="navbar-form navbar-right" th:action="@{/article/search}">
+
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="搜索" name="key"/>
                             <span class="input-group-btn">

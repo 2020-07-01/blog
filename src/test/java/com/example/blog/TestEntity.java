@@ -3,9 +3,11 @@ package com.example.blog;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.util.unit.DataUnit;
 
-import java.util.UUID;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author :qiang
@@ -18,11 +20,10 @@ public class TestEntity {
 
 
     @Test
-    public void getUUid(){
+    public void getUUid() {
 
-        String string = UUID.randomUUID().toString();
-        System.out.println("UUID："+string);
-
+        DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        System.out.println(format1.format(new Date()));
     }
 
 

@@ -19,4 +19,7 @@ public interface ArticleDao {
 
     //根基id查询博客
     Article selectById(String id);
+
+    //保存博客信息
+    int saveBlog(Article article);
 }

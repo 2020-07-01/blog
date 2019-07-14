@@ -10,7 +10,13 @@ public class Category {
     /*
      * 博客类别编号
      */
-    private String id;
+    private String cId;
+
+    private String categoryName;
+
+
+    private String displayName;
+
 
     public String getDisplayName() {
         return displayName;
@@ -23,18 +29,14 @@ public class Category {
     /*
      * 类别名称
      */
-    private String categoryName;
 
 
-    private String displayName;
-
-
-    public String getId() {
-        return id;
+    public String getCId() {
+        return cId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String cId) {
+        this.cId = cId;
     }
 
     public String getCategoryName() {
@@ -47,8 +49,8 @@ public class Category {
 
     @Override
     public String toString() {
-        return "Category{" +
-                "id='" + id + '\'' +
+        return "CategoryService{" +
+                "cId='" + cId + '\'' +
                 ", categoryName='" + categoryName + '\'' +
                 ", displayName='" + displayName + '\'' +
                 '}';

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author :qiang
@@ -40,5 +41,21 @@ public class ArticleServiceImpl implements ArticleService {
     //根据id查询博客
     public Article selectById(String id) {
         return articleDao.selectById(id);
+    }
+
+    //保存博客信息
+    public int saveBlog(Article article) {
+        //设置aId
+        article.setAId(UUID.randomUUID().toString());
+        //取前40个字符为摘要,否则整个文章为摘要
+        if (article.getContent().length() > 40) {
+            article.setSummary(article.getContent().substring(0, 40));
+        } else {
+            article.setSummary(article.getContent());
+        }
+        //设置时间
+
+
+        return articleDao.saveBlog(article);
     }
 }

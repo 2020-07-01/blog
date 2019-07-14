@@ -11,7 +11,7 @@ public class Article {
     /*
      * 博客编号
      */
-    private String id;
+    private String aId;
 
     /*
      * 博客标题
@@ -39,12 +39,12 @@ public class Article {
     private String createDate;
 
 
-    public String getId() {
-        return id;
+    public String getaId() {
+        return aId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setAId(String aId) {
+        this.aId = aId;
     }
 
     public String getTitle() {
@@ -90,7 +90,7 @@ public class Article {
     @Override
     public String toString() {
         return "Article{" +
-                "id='" + id + '\'' +
+                "AId='" + aId + '\'' +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", category=" + category +
