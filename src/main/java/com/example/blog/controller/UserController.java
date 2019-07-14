@@ -117,6 +117,11 @@ public class UserController {
 
     }
 
+    /**
+     * 保存博客模块
+     * @param article
+     * @return
+     */
     @RequestMapping(value = "/save")
     public String save(Article article) {
         //保存博客信息
