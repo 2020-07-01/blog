@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @author :qiang
@@ -36,8 +35,9 @@ public class UserController {
     @Autowired
     CategoryService categoryService;
 
+
     /**
-     * 后台主页
+     * 默认进入后台主页
      *
      * @return
      */
@@ -76,7 +76,7 @@ public class UserController {
     }
 
     /**
-     * 跳转至写博客界面
+     * 进入写博客界面
      *
      * @return
      */
@@ -87,6 +87,7 @@ public class UserController {
         List<Category> categories = categoryService.selectAll();
         model.addAttribute("categories", categories);
         model.addAttribute("article", new Article());
+
         return "admin/write";
     }
 
@@ -94,21 +95,21 @@ public class UserController {
     /**
      * 删除博客模块
      *
-     * @param id：接受前端返回的博客id
+     * @param aId：接受前端返回的博客id
      * @return ：重定向到index页面
      */
     @RequestMapping(value = "/delete")
-    public String deleteBlog(@RequestParam("id") String id) {
-        System.out.println("id：" + id);
-        articleService.deleteBlog(id);
+    public String deleteBlog(@RequestParam("aId") String aId) {
+
+        articleService.deleteBlog(aId);
         return "redirect:/admin";
     }
 
 
     @RequestMapping(value = "/update")
-    public String updateBlog(Model model) {
+    public String updateBlog(@RequestParam("aId") String aId, Model model) {
         //根据id查询博客@RequestParam("id") String id,Model model
-        Article article = articleService.selectById("1");
+        Article article = articleService.selectById(aId);
 
         model.addAttribute("article", article);
         Category category = article.getCategory();
@@ -119,6 +120,7 @@ public class UserController {
 
     /**
      * 保存博客模块
+     *
      * @param article
      * @return
      */

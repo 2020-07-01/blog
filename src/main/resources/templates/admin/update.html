@@ -45,7 +45,7 @@
 <!--引入首部部分-->
 <div th:include="/common/head :: top"></div>
 
-<form method="post" th:action="@{/admin/save}" th:object="${article}">
+<form th:action="@{/admin/save}" th:object="${article}">
     <div class="container">
         <br/>
         <br/>
@@ -65,7 +65,7 @@
                         </ul>
                     </div>
                     <input name="category" id="cateoryInput" th:field="*{category.categoryName}"/>
-                    <input name="id" th:value="${article .id}"/>
+                    <input name="id" th:value="${article.aId}"/>
                     <input th:type="text" class="form-contorl" name="title" th:field="*{title}"
                            th:placeholder="${article.title}"/>
                 </div>

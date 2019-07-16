@@ -11,13 +11,13 @@ public interface ArticleService {
     List<Article> selectAll();
 
     //根据id删除博客
-    int deleteBlog(String id);
+    int deleteBlog(String aId);
 
     //修改博客
     int updateBlog(Article article);
 
     //根据id查询博客
-    Article selectById(String id);
+    Article selectById(String aId);
 
     //保存博客信息
     int saveBlog(Article article);

@@ -26,38 +26,98 @@
         }
     }
 </script>
+
 <!--引入头部-->
 <div th:include="/common/head :: top"></div>
 
-<!--写博客模块-->
+<!--文章列表-->
 <div class="container">
-    <div class="panel panel-default">
-        <div class="panel-heading">文章列表</div>
-        <div class="panel-body">
-            <p><a class="btn btn-primary btn-sm" th:href="@{/admin/write}" role="button">写博客</a></p>
+    <div class="row">
+        <div class="span12">
+            <h2 class="text-center text-info">
+                文章列表
+            </h2>
         </div>
-
-        <!--显示博客表单-->
-        <table class="table">
-            <tr class="info">
-                <td>编号</td>
-                <td>标题</td>
-                <td>摘要</td>
-                <td>发表时间</td>
-                <td style="text-align: center" colspan="2">操作</td>
-            </tr>
-
-            <!--便利所有的博客-->
-            <tr th:each="article:${articles}">
-                <td th:text="${article.aId}"></td>
-                <td th:text="${article.title}"></td>
-                <td th:text="${article.summary}"></td>
-                <td th:text="${article.createDate}"></td>
-                <td><a th:href="@{/admin/update/(id = ${article.aId})}">修改</a></td>
-                <td><a onclick="del()" th:href="@{/admin/delete/(aId = ${article.aId})}">删除</a></td>
-            </tr>
-        </table>
     </div>
 </div>
+<br/>
+<!--写博客和模糊查询-->
+<div class="container">
+
+    <form class="form-inline" role="form" th:action="@{/school/listIf}" method="post">
+        <div class="form-group col-md-3">
+            <a class="btn btn-primary btn-sm" th:href="@{/admin/write}" role="button">写博客</a>
+        </div>
+        <span></span>
+        <div class="form-group col-md-3">
+            <label for="f1">姓名</label>
+            <input type="text" id="f1" name="name" class="form-control" placeholder="请输入姓名"/>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="f2">专业</label>
+            <input type="text" id="f2" name="professional" class="form-control" placeholder="请输入专业名称"/>
+        </div>
+        <div class="form-group col-md-3">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" value="查询" class="btn btn-info"/>
+            </div>
+        </div>
+    </form>
+
+</div>
+<br/>
+<div class="container">
+
+    <!--标题和摘要和发表时间占两个-->
+
+    <table class="table table-hover">
+        <tr>
+        <tr class="info">
+            <td>编号</td>
+            <td>标题</td>
+            <td>摘要</td>
+            <td>发表时间</td>
+            <td>操作</td>
+        </tr>
+        </tr>
+        <tr>
+        </tr>
+        <tr th:each="article:${articles}">
+            <td th:text="${article.aId}"></td>
+            <td th:text="${article.title}"></td>
+            <td th:text="${article.summary}"></td>
+            <td th:text="${article.createDate}"></td>
+
+            <td>
+
+                <a th:href="@{/admin/update (aId = ${article.aId})}">
+                    <button type="button" class="btn btn-info btn-xs">修改</button>
+                </a>
+                <a onclick="return del()" th:href="@{/admin/delete (aId = ${article.aId})}">
+                    <button type="button" class="btn btn-danger btn-xs">删除</button>
+                </a>
+            </td>
+
+
+        </tr>
+    </table>
+
+    <div class="navbar navbar-fixed-bottom">
+        <div class="col-xs-5" style="float:left">
+            <br/>
+            当前第1页，共5页
+        </div>
+        <div class="col-xs-6">
+            <ul class="pagination" style="float:right">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">上一页</a></li>
+                <li><a href="#">下一页</a></li>
+                <li><a href="#">末页</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>
