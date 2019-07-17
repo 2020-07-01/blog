@@ -5,16 +5,15 @@
 <mapper namespace="com.example.blog.dao.UserDao">
 
     <sql id="base_sql">
-        id,user_name,user_password
+        user_name,user_password
     </sql>
-
 
     <!--查询用户账号-->
     <select id="selectUserByNP" resultType="com.example.blog.entity.User">
         select
         <include refid="base_sql"/>
         from user
-        where user_name = #{userName} and user_password = #{userPassword}
+        where user_name = #{userName,jdbcType=VARCHAR} and user_password = #{userPassword,jdbcType=VARCHAR}
     </select>
 
 

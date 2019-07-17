@@ -6,7 +6,7 @@
 
     <!--sql语句-->
     <sql id="base_sql">
-        a_id,title,content,category,summary,create_date
+        a_id,title,content,category,summary,create_date,edit_date
     </sql>
 
     <!--结果映射-->
@@ -14,8 +14,8 @@
         <id column="a_id" property="aId" jdbcType="VARCHAR"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
-        <result column="summary" property="summary" jdbcType="VARCHAR"/>
         <result column="create_date" property="createDate" jdbcType="VARCHAR"/>
+        <result column="edit-date" property="editDate" jdbcType="VARCHAR"/>
 
         <!--此处使用连表查询,进行结果结果集的影射-->
         <association property="category" javaType="com.example.blog.entity.Category">
@@ -32,13 +32,14 @@
         from article
     </select>
 
+
     <!--根据id删除博客-->
-    <delete id="deleteBlog">
+   <!-- <delete id="deleteBlog">
         delete from article where a_id = #{aId}
     </delete>
 
 
-    <!--根据id查询博客-->
+    &lt;!&ndash;根据id查询博客&ndash;&gt;
     <select id="selectById" parameterType="String" resultMap="resultMap">
         select
         <include refid="base_sql"/>
@@ -47,11 +48,11 @@
     </select>
 
 
-    <!--保存博客-->
+    &lt;!&ndash;保存博客&ndash;&gt;
     <insert id="saveBlog" parameterType="com.example.blog.entity.Article">
         insert into article (a_id,title,content,category,summary,create_date)
         values (#{aId},#{title},#{content},#{category.categoryName},#{summary},#{createDate})
 
-    </insert>
+    </insert>-->
 
 </mapper>

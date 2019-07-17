@@ -3,6 +3,8 @@ package com.example.blog.service.impl;
 import com.example.blog.dao.UserDao;
 import com.example.blog.entity.User;
 import com.example.blog.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
 
+    protected static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class.getName());
+
     @Autowired
     UserDao userDao;
 
@@ -27,12 +31,16 @@ public class UserServiceImpl implements UserService {
      * @param userPassword
      * @return
      */
-    public boolean getUSer(String userName, String userPassword) {
+    public boolean getUser(String userName, String userPassword) {
+
         User user = userDao.selectUserByNP(userName, userPassword);
+
         //判断是否可以查询到用户
         if (user == null) {
+            log.error("用户不存在");
             return false;
         } else {
+            log.info("查询用户");
             return true;
         }
     }

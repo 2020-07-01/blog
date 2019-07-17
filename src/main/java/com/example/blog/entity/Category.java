@@ -8,34 +8,35 @@ package com.example.blog.entity;
  */
 public class Category {
     /*
-     * 博客类别编号
+     * desc:博客类别id
+     * length:24
+     * notNull:false
+     * dateType:String
      */
     private String cId;
 
+    /*
+     * desc:类别名称
+     * length:24
+     * notNull:false
+     * dateType:String
+     */
     private String categoryName;
 
 
+    /*
+     * desc:类别名称
+     * length:24
+     * notNull:false
+     * dateType:String
+     */
     private String displayName;
 
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
-    /*
-     * 类别名称
-     */
-
-
-    public String getCId() {
+    public String getcId() {
         return cId;
     }
 
-    public void setId(String cId) {
+    public void setcId(String cId) {
         this.cId = cId;
     }
 
@@ -47,9 +48,17 @@ public class Category {
         this.categoryName = categoryName;
     }
 
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
     @Override
     public String toString() {
-        return "CategoryService{" +
+        return "Category{" +
                 "cId='" + cId + '\'' +
                 ", categoryName='" + categoryName + '\'' +
                 ", displayName='" + displayName + '\'' +

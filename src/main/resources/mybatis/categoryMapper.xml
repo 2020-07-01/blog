@@ -4,24 +4,24 @@
 
 <mapper namespace="com.example.blog.dao.CategoryDao">
 
-    <!--sql语句-->
+    <!--&lt;!&ndash;sql语句&ndash;&gt;
     <sql id="base_sql">
         c_id,category_name,display_name
     </sql>
 
-    <!--结果映射-->
+    &lt;!&ndash;结果映射&ndash;&gt;
     <resultMap id="resultMap" type="com.example.blog.entity.Category">
         <id column="c_id" property="cId" jdbcType="VARCHAR"/>
         <result column="category_name" property="categoryName" jdbcType="VARCHAR"/>
         <result column="display_name" property="displayName" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <!--查询所有的博客-->
+    &lt;!&ndash;查询所有的博客&ndash;&gt;
     <select id="selectAll" resultMap="resultMap">
         select
         <include refid="base_sql"/>
         from category
-    </select>
+    </select>-->
 
 
 </mapper>

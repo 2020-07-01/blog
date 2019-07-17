@@ -9,41 +9,67 @@ package com.example.blog.entity;
 public class Article {
 
     /*
-     * 博客编号
+     * desc:博客编号
+     * length:24
+     * notNull:false
+     * dateType:String
      */
     private String aId;
 
     /*
-     * 博客标题
+     * desc:博客标题
+     * length:24
+     * notNull:false
+     * dateType:String
      */
     private String title;
 
     /*
-     * 博客内容
+     * desc:博客内容
+     * length:65535/3=21480
+     * notNull:false
+     * dateType:String
      */
     private String content;
 
     /*
-     * 博客类别
+     * desc:博客类别
+     * length:24
+     * notNull:false
+     * dateType:String
      */
     private Category category;
 
     /*
-     * 博客摘要:默认取前40个字
+     * desc:博客摘要
+     * length:40
+     * notNull:false
+     * dateType:String
      */
     private String summary;
 
     /*
-     * 创建时间：由系统生成
+     * desc:创建时间
+     * length:24
+     * notNull:false
+     * dateType:String
      */
     private String createDate;
 
+
+    /*
+     * desc:修改时间
+     * length:24
+     * notNull:false
+     * dateType:String
+     */
+    private String editDate;
 
     public String getaId() {
         return aId;
     }
 
-    public void setAId(String aId) {
+    public void setaId(String aId) {
         this.aId = aId;
     }
 
@@ -87,15 +113,24 @@ public class Article {
         this.createDate = createDate;
     }
 
+    public String getEditDate() {
+        return editDate;
+    }
+
+    public void setEditDate(String editDate) {
+        this.editDate = editDate;
+    }
+
     @Override
     public String toString() {
         return "Article{" +
-                "AId='" + aId + '\'' +
+                "aId='" + aId + '\'' +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", category=" + category +
                 ", summary='" + summary + '\'' +
                 ", createDate='" + createDate + '\'' +
+                ", editDate='" + editDate + '\'' +
                 '}';
     }
 }

@@ -44,8 +44,8 @@ public class UserController {
     @RequestMapping(value = "")
     public String admin(Model model) {
         //查询所有的博客信息在页面进行显示
-        List<Article> list = articleService.selectAll();
-        model.addAttribute("articles", list);
+        List<Article> articleList = articleService.selectAll();
+        model.addAttribute("articles", articleList);
         return "admin/index";
     }
 
@@ -67,10 +67,13 @@ public class UserController {
      */
     @RequestMapping(value = "/dologin", method = RequestMethod.POST)
     public String doLogin(User user) {
+
         //如果可以获取到用户名和密码则成功否则失败
-        if (userService.getUSer(user.getUserName(), user.getUserPassword())) {
+        if (userService.getUser(user.getUserName(), user.getUserPassword())){
+            System.out.println("1");
             return "redirect:/admin";
         } else {
+            System.out.println("2");
             return "admin/login";
         }
     }
@@ -79,7 +82,7 @@ public class UserController {
      * 进入写博客界面
      *
      * @return
-     */
+     *//*
     @RequestMapping(value = "/write")
     public String write(Model model) {
 
@@ -92,12 +95,12 @@ public class UserController {
     }
 
 
-    /**
+    *//**
      * 删除博客模块
      *
      * @param aId：接受前端返回的博客id
      * @return ：重定向到index页面
-     */
+     *//*
     @RequestMapping(value = "/delete")
     public String deleteBlog(@RequestParam("aId") String aId) {
 
@@ -118,12 +121,12 @@ public class UserController {
 
     }
 
-    /**
+    *//**
      * 保存博客模块
      *
      * @param article
      * @return
-     */
+     *//*
     @RequestMapping(value = "/save")
     public String save(Article article) {
         //保存博客信息
@@ -131,6 +134,6 @@ public class UserController {
 
         return "redirect:";
     }
-
+*/
 }
 
