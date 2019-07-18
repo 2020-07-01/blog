@@ -17,12 +17,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
-
     protected static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class.getName());
 
     @Autowired
     UserDao userDao;
-
 
     /**
      * 根据用户名和密码查询用户信息

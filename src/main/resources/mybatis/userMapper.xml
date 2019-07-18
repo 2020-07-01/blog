@@ -4,12 +4,19 @@
 
 <mapper namespace="com.example.blog.dao.UserDao">
 
+
+    <resultMap id="resultMap" type="com.example.blog.entity.User">
+
+        <result column="user_name" property="userName"/>
+        <result column="user_password" property="userPassword"/>
+    </resultMap>
+
     <sql id="base_sql">
         user_name,user_password
     </sql>
 
     <!--查询用户账号-->
-    <select id="selectUserByNP" resultType="com.example.blog.entity.User">
+    <select id="selectUserByNP" resultMap="resultMap">
         select
         <include refid="base_sql"/>
         from user
