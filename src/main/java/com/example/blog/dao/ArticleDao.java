@@ -22,4 +22,11 @@ public interface ArticleDao {
 
     //保存博客信息
     int saveBlog(Article article);
+
+    //根据key进行搜索
+    List<Article> search(String key);
+
+    //修改博客信息
+    int update(Article article);
+
 }

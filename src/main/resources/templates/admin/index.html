@@ -64,9 +64,9 @@
     <!--标题和摘要和发表时间占两个-->
     <table class="table table-hover">
         <tr class="info">
-            <td>编号</td>
-            <td>标题</td>
-            <td>摘要</td>
+            <td style="width: 150px">编号</td>
+            <td style="width:25%">标题</td>
+            <td style="width:25%">摘要</td>
             <td>发表时间</td>
             <td>操作</td>
         </tr>
@@ -76,16 +76,17 @@
         </tr>
 
         <tr th:each="article:${articles}">
-            <td th:text="${article.aId}"></td>
-            <td th:text="${article.title}"></td>
-            <td th:text="${article.summary}"></td>
+            <td style="width: 150px" th:text="${article.aId}"></td>
+            <td style="width:25%" th:text="${article.title}"></td>
+            <td style="width:25%" th:text="${article.summary}"></td>
             <td th:text="${article.createDate}"></td>
 
             <td>
 
-                <a th:href="@{/admin/update (aId = ${article.aId})}">
+                <a th:href="@{/admin/updateBlog (aId = ${article.aId})}">
                     <button type="button" class="btn btn-info btn-xs">修改</button>
                 </a>
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;</label>
                 <a onclick="return del()" th:href="@{/admin/delete (aId = ${article.aId})}">
                     <button type="button" class="btn btn-danger btn-xs">删除</button>
                 </a>

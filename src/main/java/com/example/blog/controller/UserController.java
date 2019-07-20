@@ -108,17 +108,38 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "/update")
+    /**
+     * 进入更新博客页面
+     *
+     * @param aId
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/updateBlog")
     public String updateBlog(@RequestParam("aId") String aId, Model model) {
-        //根据id查询博客@RequestParam("id") String id,Model model
+        //根据id查询要修改的博客
         Article article = articleService.selectById(aId);
-
+        //查询所有的类别
+        List<Category> categoryList = categoryService.selectAll();
         model.addAttribute("article", article);
-        Category category = article.getCategory();
-        model.addAttribute("category1", category);
-        return "admin/update";
+        model.addAttribute("category", categoryList);
 
+        return "admin/update";
     }
+
+    /**
+     * 更新博客
+     *
+     * @param article
+     * @return
+     */
+    @RequestMapping(value = "/update")
+    public String update(Article article) {
+        System.out.println(article.toString());
+        return "redirect:";
+    }
+
+
 
     /* *
      * 保存博客模块
@@ -128,10 +149,12 @@ public class UserController {
 
     @RequestMapping(value = "/save")
     public String save(Article article) {
+        System.out.println(article.toString());
         //保存博客信息
         articleService.saveBlog(article);
-
         return "redirect:";
     }
+
+
 }
 

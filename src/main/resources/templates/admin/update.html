@@ -32,46 +32,79 @@
 
     <script th:inline="javascript">
         function selectCategory(obj) {
-            var name = $(obj).attr("name");
-            var displayName = $(obj).attr("abbr");
-            console.log(name + "   " + displayName);
-            $("#categoryBtn").html(displayName);
-            $("#cateoryInput").val(name);
+            var categoryName = $(obj).attr("name");//获取name的值并传递给categoryName
+            var cId = $(obj).attr("cId");//获取选中的类别的id
+            //var displayName = $(obj).attr("abbr");
+            //console.log(name + "   " + displayName);
+            //$("#categoryBtn").html(displayName);
+
+            $("#cId").val(cId);
+            $("#cateoryInput").val(categoryName);//设置id为categoryInput的标签的值为categoryName
         }
     </script>
+
 
 </head>
 <body>
 <!--引入首部部分-->
 <div th:include="/common/head :: top"></div>
+<form class="form-inline" method="post" th:action="@{/admin/update}" th:object="${article}">
 
-<form th:action="@{/admin/save}" th:object="${article}">
-    <div class="container">
-        <br/>
-        <br/>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="input-group">
-                    <div class="input-group-btn">
+    <!--向后端传入博客的id-->
+    <input style="display:none" type="text" name="aId"
+           th:field="*{aId}"/>
 
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false" id="categoryBtn">分类
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li th:each="category:${category1}">
-                                <a th:name="${category1.categoryName}" th:abbr="${category1.displayName}"
-                                   onclick="selectCategory(this)" th:text="${category1.displayName}"></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <input name="category" id="cateoryInput" th:field="*{category.categoryName}"/>
-                    <input name="id" th:value="${article.aId}"/>
-                    <input th:type="text" class="form-contorl" name="title" th:field="*{title}"
-                           th:placeholder="${article.title}"/>
+    <input style="display: none" name="cId" id="cId" type="text"
+           th:field="*{category.cId}"/>
+
+    <br/>
+    <div class="row"><!--设置一行-->
+
+        <div class="col-lg-1" style="width: 110px"></div>
+
+        <div class="col-lg-2"><!--占6列-->
+
+            <div class="input-group">
+                <div class="input-group-btn">
+
+                    <button type="button" class="btn btn-default" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" id="categoryBtn">分类
+                    </button>
+
+                    <!--
+                        th:text设置文本的值会在前端进行显示
+                        th:name 设置标签的name的值
+                    -->
+                    <ul class="dropdown-menu">
+                        <li th:each="category1:${category}">
+                            <a th:name="${category1.categoryName}" th:cId="${category1.cId}"
+                               onclick="selectCategory(this)" th:text="${category1.displayName}"> </a>
+                        </li>
+                    </ul>
                 </div>
+
+                <!--博客类型-->
+                <input style="width: 150px" name="category" class="form-control" id="cateoryInput" type="text"
+                       th:field="*{category.categoryName}"/>
+
+
+            </div>
+
+        </div>
+
+
+        <!--标题-->
+        <div class="col-lg-8">
+            <div class="form-group">
+                <label class=".sr-only"></label>
+                <input style="width: 790px" type="text" class="form-control" name="title" placeholder="请输入标题"
+                       th:field="*{title}"/>
             </div>
         </div>
+
     </div>
+
+
     <br/>
     <!--文本标记区-->
     <div id="layout" style="width: 100%;height: 100%">

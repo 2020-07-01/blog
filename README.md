@@ -16,12 +16,12 @@ create table if not exists user
 create table if not exists article
 (
     `a_id`        varchar(24)    not null comment '博客id',
-    `title`       varchar(24)    not null comment '博客标题',
+    `title`       varchar(50)    not null comment '博客标题',
     `category`    varchar(24)    not null comment '博客类型id',
     `content`     text(65535) not null comment '博客内容',
     `summary`     varchar(40)    not null comment '博客摘要',
     `create_date` varchar(24)    not null comment '创建时间',
-    `edit_date`   varchar(24)    not null comment '修改时间',
+    `edit_date`   varchar(24)   default null comment '修改时间',
     primary key (`a_id`)
 ) default charset = utf8;
 
@@ -52,7 +52,7 @@ user表：
  字段名 | 类型 | 长度 |  null  | 主键 | 注释
 ---------|----------|---------|---------|---------|---------
  a_id | varchar | 24 | N | Y | 博客id
- title | varchar | 24 |N | N | 博客标题
+ title | varchar | 50|N | N | 博客标题
  category | varchar | 24 | N | N | 博客类型 
  content | text | 65535 | N | N | 博客内容
  summary | varcahr | 40 | N | N | 博客摘要
@@ -67,3 +67,12 @@ category表：
  category_name | varchar | 24 | N| N | 博客类型 
  display_name | varchar | 24 | N| N | 博客类型 
 
+
+博客类型结构
+```sql
+insert into category(c_id, category_name, display_name)
+VALUES ('1', 'javaPage', 'Java专栏'),
+       ('2', 'computerPage', '计算机基础专栏'),
+       ('3', 'DSAPage', '数据结构与算法'),
+       ('4', 'notePage', '内功修炼')
+```

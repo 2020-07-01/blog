@@ -3,6 +3,7 @@ package com.example.blog.support;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * @author :qiang
@@ -13,7 +14,7 @@ import java.util.Date;
 public class DateSupport {
 
     //获取当前时间
-    public String getDate() {
+    public static String getDate() {
         DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         return format1.format(new Date());
     }

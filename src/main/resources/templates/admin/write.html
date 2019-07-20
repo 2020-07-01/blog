@@ -29,11 +29,13 @@
 
     <script th:inline="javascript">
         function selectCategory(obj) {
-            var name = $(obj).attr("name");
-            var displayName = $(obj).attr("abbr");
+            var categoryName = $(obj).attr("name");
+            var cId = $(obj).attr("cId");//获取选中的类别的id
+            //var displayName = $(obj).attr("abbr");
             //console.log(name + "   " + displayName);
             //$("#categoryBtn").html(displayName);
-            $("#cateoryInput").val(name);
+            $("#cId").val(cId);
+            $("#cateoryInput").val(categoryName);
         }
     </script>
 
@@ -44,12 +46,18 @@
 
 <div class="container">
     <form class="form-inline" method="post" th:action="@{/admin/save}" th:object="${article1}">
+
+        <!--向-->
+        <input style="display: none" name="cId" id="cId" type="text"
+               th:field="*{category.cId}"/>
+
         <br/>
-        <div class="row"><!--设置一行-->
+        <div class="row">
 
-            <div class="col-lg-1"></div>
+            <div class="col-lg-1" style="width: 70px"></div>
 
-            <div class="col-lg-5"><!--占6列-->
+
+            <div class="col-lg-2"><!--占6列-->
 
                 <div class="input-group">
                     <div class="input-group-btn">
@@ -60,13 +68,16 @@
 
                         <ul class="dropdown-menu">
                             <li th:each="category:${categories}">
-                                <a th:name="${category.categoryName}" th:abbr="${category.displayName}"
+                                <a th:name="${category.categoryName}" th:cId="${category.cId}"
                                    onclick="selectCategory(this)" th:text="${category.displayName}"></a>
                             </li>
                         </ul>
                     </div>
 
-                    <input style="width: 380px"  name="category" class="form-control" id="cateoryInput" type="text"
+
+                    <!--显示博客类型，-->
+                    <input style="width: 150px" name="category" class="form-control" id="cateoryInput" type="text"
+
                            th:field="*{category.categoryName}"/>
 
                 </div>
@@ -74,10 +85,12 @@
             </div>
 
 
-            <div class="col-lg-6">
+            <div class="col-lg-1" style="width: 30px"></div>
+            <!--标题-->
+            <div class="col-lg-8">
                 <div class="form-group">
-                    <label class=".sr-only"></label>
-                    <input style="width: 480px" type="text" class="form-control" name="title" placeholder="请输入标题"
+                    <label class="sr-only">标题 </label>
+                    <input style="width: 780px" type="text" class="form-control" name="title" placeholder="请输入标题"
                            th:field="*{title}">
                 </div>
             </div>
@@ -91,7 +104,6 @@
                 <textarea style="display:none;" name="content" th:field="*{content}"></textarea>
             </div>
         </div>
-
 
         <!--提交按钮-->
         <div class="row">
