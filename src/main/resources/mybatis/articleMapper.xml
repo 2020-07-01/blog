@@ -60,4 +60,16 @@
 
     </insert>
 
+
+    <!--修改博客信息-->
+    <update id="updateBlog" parameterType="com.example.blog.entity.Article">
+        update article
+        set title = #{title,jdbcType = VARCHAR},
+            content = #{content,jdbcType = VARCHAR},
+            category = #{category.cId,jdbcType = VARCHAR},
+            summary = #{summary,jdbcType = VARCHAR},
+            edit_date = #{editDate,jdbcType = VARCHAR}
+        where a_id = #{aId};
+
+    </update>
 </mapper>

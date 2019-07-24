@@ -29,21 +29,36 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     ArticleDao articleDao;
 
-    //查询所有的博客信息
+    /*
+     * 查询所有的博客信息
+     */
     public List<Article> selectAll() {
         List<Article> articleList = articleDao.selectAll();
         return articleList;
     }
 
 
-    //根据id删除博客
+    /*
+     * 根据id删除博客
+     */
     public int deleteBlog(String id) {
         return articleDao.deleteBlog(id);
     }
 
     //修改博客
     public int updateBlog(Article article) {
-        return articleDao.updateBlog(article);
+        article.setEditDate(DateSupport.getDate());
+        //取前40个字符为摘要,否则整个文章为摘要
+        if (article.getContent().length() > 40) {
+            article.setSummary(article.getContent().substring(0, 40));
+        } else {
+            article.setSummary(article.getContent());
+        }
+        Integer row = articleDao.updateBlog(article);
+
+        log.info("修改成功");
+
+        return row;
     }
 
     //根据id查询博客

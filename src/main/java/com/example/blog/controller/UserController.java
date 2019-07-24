@@ -142,7 +142,9 @@ public class UserController {
      */
     @RequestMapping(value = "/update")
     public String update(Article article) {
+        System.out.println(article.toString());
 
+        articleService.updateBlog(article);
         return "redirect:";
     }
 
@@ -157,6 +159,7 @@ public class UserController {
     @RequestMapping(value = "/save")
     public String save(Article article) {
         System.out.println(article.toString());
+
         //保存博客信息
         articleService.saveBlog(article);
         return "redirect:";
