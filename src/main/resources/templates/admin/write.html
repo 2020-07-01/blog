@@ -29,13 +29,13 @@
 
     <script th:inline="javascript">
         function selectCategory(obj) {
-            var categoryName = $(obj).attr("name");
+            var displayName = $(obj).attr("name");
             var cId = $(obj).attr("cId");//获取选中的类别的id
             //var displayName = $(obj).attr("abbr");
             //console.log(name + "   " + displayName);
             //$("#categoryBtn").html(displayName);
             $("#cId").val(cId);
-            $("#cateoryInput").val(categoryName);
+            $("#cateoryInput").val(displayName);
         }
     </script>
 
@@ -68,7 +68,7 @@
 
                         <ul class="dropdown-menu">
                             <li th:each="category:${categories}">
-                                <a th:name="${category.categoryName}" th:cId="${category.cId}"
+                                <a th:name="${category.displayName}" th:cId="${category.cId}"
                                    onclick="selectCategory(this)" th:text="${category.displayName}"></a>
                             </li>
                         </ul>

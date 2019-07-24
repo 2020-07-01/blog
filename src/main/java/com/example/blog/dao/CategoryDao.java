@@ -8,6 +8,9 @@ import java.util.List;
 @Repository
 public interface CategoryDao {
 
-    //查询所有的类别信息
+    // 查询所有的类别信息
     List<Category> selectAll();
+
+
 }
+

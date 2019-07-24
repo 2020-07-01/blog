@@ -6,6 +6,8 @@ import com.example.blog.entity.User;
 import com.example.blog.service.ArticleService;
 import com.example.blog.service.CategoryService;
 import com.example.blog.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,7 @@ import java.util.List;
 @Controller
 public class UserController {
 
+    private static final Logger log = LoggerFactory.getLogger(UserController.class.getName());
 
     @Autowired
     UserService userService;
@@ -120,8 +123,11 @@ public class UserController {
     public String updateBlog(@RequestParam("aId") String aId, Model model) {
         //根据id查询要修改的博客
         Article article = articleService.selectById(aId);
+        log.info("article数据：" + article.toString());
         //查询所有的类别
         List<Category> categoryList = categoryService.selectAll();
+
+        model.addAttribute("displayName", article.getCategory().getDisplayName());
         model.addAttribute("article", article);
         model.addAttribute("category", categoryList);
 
@@ -136,7 +142,7 @@ public class UserController {
      */
     @RequestMapping(value = "/update")
     public String update(Article article) {
-        System.out.println(article.toString());
+
         return "redirect:";
     }
 

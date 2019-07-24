@@ -25,10 +25,14 @@ public class CategoryServiceImpl implements CategoryService {
     CategoryDao categoryDao;
 
     //查询所有的类别信息
+    @Override
     public List<Category> selectAll() {
 
         List<Category> categoryList = categoryDao.selectAll();
         log.info("查询成功");
         return categoryList;
     }
+
+
+
 }

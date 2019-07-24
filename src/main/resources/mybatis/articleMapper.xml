@@ -4,10 +4,12 @@
 
 <mapper namespace="com.example.blog.dao.ArticleDao">
 
+
     <!--sql语句-->
     <sql id="base_sql">
-        a_id,title,content,category,summary,create_date,edit_date
+        a_id,title,content,c_id,category_name,display_name,summary,create_date,edit_date
     </sql>
+
 
     <!--结果映射-->
     <resultMap id="resultMap" type="com.example.blog.entity.Article">
@@ -31,7 +33,8 @@
     <select id="selectAll" resultMap="resultMap">
         select
         <include refid="base_sql"/>
-        from article
+        from article,category
+        where category = category.c_id;
     </select>
 
 
@@ -45,8 +48,8 @@
     <select id="selectById" parameterType="String" resultMap="resultMap">
         select
         <include refid="base_sql"/>
-        from article
-        where a_id = #{aId};
+        from article,category
+        where a_id = #{aId} and category = category.c_id;
     </select>
 
 
