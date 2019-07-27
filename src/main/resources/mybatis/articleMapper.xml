@@ -70,6 +70,13 @@
             summary = #{summary,jdbcType = VARCHAR},
             edit_date = #{editDate,jdbcType = VARCHAR}
         where a_id = #{aId};
-
     </update>
+
+    <!--根据category查询所有的博客-->
+    <select id="selectAllByCategory" resultMap="resultMap">
+        select
+        <include refid="base_sql"/>
+        from article,category
+        where category = #{category,jdbcType = VARCHAR} and category = category.c_id;
+    </select>
 </mapper>

@@ -104,5 +104,13 @@ public class ArticleServiceImpl implements ArticleService {
         return row;
     }
 
+    //根据category查询所有的博客
+    @Override
+    public List<Article> selectAllByCategory(String category) {
+        List<Article> articleList = articleDao.selectAllByCategory(category);
+
+        return articleList;
+    }
+
 
 }

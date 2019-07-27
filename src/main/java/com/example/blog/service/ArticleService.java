@@ -28,4 +28,7 @@ public interface ArticleService {
     //修改博客信息
     int update(Article article);
 
+    //根据category查询所有的博客
+    List<Article> selectAllByCategory(String category);
+
 }

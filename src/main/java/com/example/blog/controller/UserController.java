@@ -23,10 +23,12 @@ import java.util.List;
  * @description :用户信息控制类
  * @other :
  */
+
 @RequestMapping(value = "/admin")
 @Controller
 public class UserController {
 
+    //创建日志实例
     private static final Logger log = LoggerFactory.getLogger(UserController.class.getName());
 
     @Autowired
@@ -147,8 +149,6 @@ public class UserController {
         articleService.updateBlog(article);
         return "redirect:";
     }
-
-
 
     /* *
      * 保存博客模块
