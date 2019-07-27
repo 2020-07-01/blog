@@ -54,7 +54,6 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-
         <!--markdown-->
         <dependency>
             <groupId>org.tautua.markdownpapers</groupId>
@@ -62,8 +61,14 @@
             <version>1.4.1</version>
         </dependency>
 
-    </dependencies>
+        <!--添加分页插件-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.5</version>
+        </dependency>
 
+    </dependencies>
     <build>
         <plugins>
             <plugin>

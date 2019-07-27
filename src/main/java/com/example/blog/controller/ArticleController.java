@@ -29,12 +29,11 @@ public class ArticleController {
 
     @Autowired
     ArticleService articleService;
-
+/*
     @RequestMapping(value = "/get")
     public String get() {
         return "front/index";
-    }
-
+    }*/
 
     //根据id查询内容，然后将内容进行显示
     @RequestMapping(value = "/detail/{aId}")

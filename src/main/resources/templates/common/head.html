@@ -19,6 +19,8 @@
 
 <body>
 
+
+color()
 <div th:fragment="top">
 
     <div class="row">
@@ -33,18 +35,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="">于强的专栏</a>
+                    <a class="navbar-brand" th:href="@{/admin/}">于强的专栏</a>
                 </div>
+
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav" id="nv1">
 
-                        <li class="active" id="firstPage"><a th:href="@{/admin/}">首页</a></li>
+                        <li id="firstPage"><a th:href="@{/admin/}">首页</a></li>
                         <li id="javaPage"><a th:href="@{/article/column/Java专栏/1}">Java专栏</a></li>
                         <li id="springPage"><a th:href="@{/article/column/计算机基础专栏/2}">计算机基础专栏</a>
                         </li>
-                        <li id="jsPage"><a th:href="@{/article/column/数据结构与算法专栏/3}">数据结构与算法专栏</a></li>
-                        <li id="algorPage"><a th:href="@{/article/column/内功修炼专栏/4}">内功修炼专栏</a></li>
+                        <li id="Page"><a th:href="@{/article/column/数据结构与算法专栏/3}">数据结构与算法专栏</a></li>
+                        <li id="notePage"><a th:href="@{/article/column/内功修炼专栏/4}">内功修炼专栏</a></li>
                     </ul>
 
                     <form class="navbar-form navbar-right" th:action="@{/article/search}">
@@ -61,22 +64,6 @@
             </div>
         </nav>
     </div>
-    <!--<script>-->
-    <!--var href = location.href;-->
-    <!--var id = href.substring(href.lastIndexOf("/") + 1, href.length);-->
-    <!--if (id=="") {-->
-    <!--id = "firstPage";-->
-    <!--}-->
-    <!--var ids = ["firstPage", "webPage", "androidPage", "rnPage", "ubuntuPage"];-->
-    <!--for (var i = 0; i < ids.length; i++) {-->
-    <!--if (id == ids[i]) {-->
-    <!--$("#" + id).attr("class", "active");-->
-    <!--} else {-->
-    <!--$("#" + ids[i]).removeAttr("class");-->
-    <!--}-->
-    <!--}-->
-    <!--</script>-->
-
 
 </div>
 </body>

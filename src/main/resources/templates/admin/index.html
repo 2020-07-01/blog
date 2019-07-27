@@ -75,7 +75,7 @@
         <tr>
         </tr>
 
-        <tr th:each="article:${articles}">
+        <tr th:each="article:${articles.list}">
             <td style="width: 150px" th:text="${article.aId}"></td>
             <td style="width:25%" th:text="${article.title}"></td>
             <td style="width:25%" th:text="${article.summary}"></td>
@@ -96,18 +96,22 @@
         </tr>
     </table>
 
+
     <div class="navbar navbar-fixed-bottom">
         <div class="col-xs-5" style="float:left">
             <br/>
-            当前第1页，共5页
+            <p>当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span> 页,共 <span
+                    th:text="${pageInfo.total}"></span> 条记录</p>
         </div>
-
         <div class="col-xs-6">
             <ul class="pagination" style="float:right">
-                <li><a href="#">首页</a></li>
-                <li><a href="#">上一页</a></li>
-                <li><a href="#">下一页</a></li>
-                <li><a href="#">末页</a></li>
+                <li><a th:href="@{/getAllPerson}">首页</a></li>
+                <li><a th:href="@{/getAllPerson(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a>
+                </li>
+                <li>
+                    <a th:href="@{/getAllPerson(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a>
+                </li>
+                <li><a th:href="@{/getAllPerson(pageNum=${pageInfo.pages})}">尾页</a></li>
             </ul>
         </div>
     </div>

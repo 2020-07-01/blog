@@ -6,6 +6,8 @@ import com.example.blog.entity.User;
 import com.example.blog.service.ArticleService;
 import com.example.blog.service.CategoryService;
 import com.example.blog.service.UserService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,10 +49,12 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "")
-    public String admin(Model model) {
-        //查询所有的博客信息在页面进行显示
-        List<Article> articleList = articleService.selectAll();
-        model.addAttribute("articles", articleList);
+    public String admin(Model model, @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum) {
+        //前端页面传回页码，每页显示9条数据
+        PageHelper.startPage(pageNum, 9);
+        List<Article> list = articleService.selectAll();
+        PageInfo<Article> pageInfo = new PageInfo<>(list);
+        model.addAttribute("articles", pageInfo);
         return "admin/index";
     }
 
