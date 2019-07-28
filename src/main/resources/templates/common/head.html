@@ -20,13 +20,12 @@
 <body>
 
 
-color()
 <div th:fragment="top">
 
     <div class="row">
         <nav class="navbar navbar-inverse">
             <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
+
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                             data-target="#bs-example-navbar-collapse-1" aria-expanded="false"/>
@@ -42,11 +41,11 @@ color()
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav" id="nv1">
 
-                        <li id="firstPage"><a th:href="@{/admin/}">首页</a></li>
+                        <li class="active" id="firstPage"><a th:href="@{/admin/}">首页</a></li>
                         <li id="javaPage"><a th:href="@{/article/column/Java专栏/1}">Java专栏</a></li>
-                        <li id="springPage"><a th:href="@{/article/column/计算机基础专栏/2}">计算机基础专栏</a>
+                        <li id="computerPage"><a th:href="@{/article/column/计算机基础专栏/2}">计算机基础专栏</a>
                         </li>
-                        <li id="Page"><a th:href="@{/article/column/数据结构与算法专栏/3}">数据结构与算法专栏</a></li>
+                        <li id="DSAPage"><a th:href="@{/article/column/数据结构与算法专栏/3}">数据结构与算法专栏</a></li>
                         <li id="notePage"><a th:href="@{/article/column/内功修炼专栏/4}">内功修炼专栏</a></li>
                     </ul>
 
@@ -66,6 +65,7 @@ color()
     </div>
 
 </div>
+
 </body>
 
 </html>

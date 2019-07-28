@@ -88,7 +88,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> search(String key) {
-
+        //获取Article列表
         List<Article> articleList = articleDao.search(key);
 
         log.info("查询成功");

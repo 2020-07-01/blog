@@ -10,7 +10,6 @@
         a_id,title,content,c_id,category_name,display_name,summary,create_date,edit_date
     </sql>
 
-
     <!--结果映射-->
     <resultMap id="resultMap" type="com.example.blog.entity.Article">
         <id column="a_id" property="aId" jdbcType="VARCHAR"/>
@@ -78,5 +77,19 @@
         <include refid="base_sql"/>
         from article,category
         where category = #{category,jdbcType = VARCHAR} and category = category.c_id;
+    </select>
+
+    <select id="search" parameterType="java.lang.String" resultMap="resultMap">
+        select
+        <include refid="base_sql"/>
+        from article,category
+        where
+        category = category.c_id and
+        (
+        title LIKE concat('%',#{key},'%')
+        or content LIKE concat('%',#{key},'%')
+        or display_name LIKE concat('%',#{key},'%')
+        )
+
     </select>
 </mapper>

@@ -8,12 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.tautua.markdownpapers.Markdown;
-import org.tautua.markdownpapers.parser.ParseException;
 
-import java.io.StringReader;
-import java.io.StringWriter;
 import java.util.List;
 
 /**
@@ -29,11 +24,6 @@ public class ArticleController {
 
     @Autowired
     ArticleService articleService;
-/*
-    @RequestMapping(value = "/get")
-    public String get() {
-        return "front/index";
-    }*/
 
     //根据id查询内容，然后将内容进行显示
     @RequestMapping(value = "/detail/{aId}")
@@ -65,11 +55,14 @@ public class ArticleController {
     }
 
     //头部的查寻功能
-    //传递过来的key进行全文搜索,存在key关键字的博客全部进行先死
     @RequestMapping(value = "/search")
     public String search(@RequestParam("key") String key, Model model) {
-        //应该在查询之前进行分页
+        System.out.println(key);
         List<Article> articleList = articleService.search(key);
+
+        for (Article article : articleList) {
+            System.out.println(article.toString());
+        }
         model.addAttribute("articleList", articleList);
 
         return "front/columnPage";

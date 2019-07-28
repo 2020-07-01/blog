@@ -1,7 +1,7 @@
 package com.example.blog.dao;
 
 import com.example.blog.entity.Article;
-import com.github.pagehelper.Page;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public interface ArticleDao {
     int saveBlog(Article article);
 
     //根据key进行搜索
-    List<Article> search(String key);
+    List<Article> search(@Param("key") String key);
 
     //修改博客信息
     int update(Article article);

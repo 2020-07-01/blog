@@ -30,7 +30,6 @@
 <!--引入头部-->
 <div th:include="/common/head :: top"></div>
 
-<br/>
 <!--写博客和模糊查询-->
 <div class="container-fluid">
 
@@ -41,7 +40,7 @@
 
         <span></span>
 
-        <div class="form-group col-md-3">
+        <!--<div class="form-group col-md-3">
             <label for="f1">类型</label>
             <input type="text" id="f1" name="name" class="form-control" placeholder="请输入类型"/>
         </div>
@@ -55,7 +54,7 @@
             <div class="col-sm-offset-2 col-sm-10">
                 <input type="submit" value="查询" class="btn btn-info"/>
             </div>
-        </div>
+        </div>-->
     </form>
 
 </div>
@@ -105,13 +104,13 @@
         </div>
         <div class="col-xs-6">
             <ul class="pagination" style="float:right">
-                <li><a th:href="@{/admin/}">首页</a></li>
-                <li><a th:href="@{/admin/ (pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a>
+                <li><a th:href="@{/admin}">首页</a></li>
+                <li><a th:href="@{/(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a>
                 </li>
                 <li>
-                    <a th:href="@{/admin/ (pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a>
+                    <a th:href="@{/admin/(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a>
                 </li>
-                <li><a th:href="@{/admin/ (pageNum=${pageInfo.pages})}">尾页</a></li>
+                <li><a th:href="@{/getAllPerson(pageNum=${pageInfo.pages})}">尾页</a></li>
             </ul>
         </div>
     </div>
