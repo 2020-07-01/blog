@@ -1,6 +1,7 @@
 package com.example.blog.dao;
 
 import com.example.blog.entity.Article;
+import com.github.pagehelper.Page;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

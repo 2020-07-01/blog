@@ -75,7 +75,7 @@
         <tr>
         </tr>
 
-        <tr th:each="article:${articles.list}">
+        <tr th:each="article:${pageInfo.list}">
             <td style="width: 150px" th:text="${article.aId}"></td>
             <td style="width:25%" th:text="${article.title}"></td>
             <td style="width:25%" th:text="${article.summary}"></td>
@@ -105,17 +105,16 @@
         </div>
         <div class="col-xs-6">
             <ul class="pagination" style="float:right">
-                <li><a th:href="@{/getAllPerson}">首页</a></li>
-                <li><a th:href="@{/getAllPerson(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a>
+                <li><a th:href="@{/admin/}">首页</a></li>
+                <li><a th:href="@{/admin/ (pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a>
                 </li>
                 <li>
-                    <a th:href="@{/getAllPerson(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a>
+                    <a th:href="@{/admin/ (pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a>
                 </li>
-                <li><a th:href="@{/getAllPerson(pageNum=${pageInfo.pages})}">尾页</a></li>
+                <li><a th:href="@{/admin/ (pageNum=${pageInfo.pages})}">尾页</a></li>
             </ul>
         </div>
     </div>
-
 </div>
 
 

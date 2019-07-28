@@ -6,6 +6,7 @@ import com.example.blog.entity.User;
 import com.example.blog.service.ArticleService;
 import com.example.blog.service.CategoryService;
 import com.example.blog.service.UserService;
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -49,12 +50,20 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "")
-    public String admin(Model model, @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum) {
-        //前端页面传回页码，每页显示9条数据
-        PageHelper.startPage(pageNum, 9);
-        List<Article> list = articleService.selectAll();
-        PageInfo<Article> pageInfo = new PageInfo<>(list);
-        model.addAttribute("articles", pageInfo);
+    public String admin(Model model, @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum
+            , @RequestParam(defaultValue = "9", value = "pageSize") Integer pageSize) {
+
+
+        PageHelper.startPage(pageNum, pageSize);
+        try {
+            List<Article> articleList = articleService.selectAll();
+            PageInfo<Article> pageInfo = new PageInfo<Article>(articleList);
+            model.addAttribute("pageInfo", pageInfo);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        log.info("分页成功");
         return "admin/index";
     }
 

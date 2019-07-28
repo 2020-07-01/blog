@@ -34,7 +34,7 @@
         select
         <include refid="base_sql"/>
         from article,category
-        where category = category.c_id;
+        where category = category.c_id
     </select>
 
 
