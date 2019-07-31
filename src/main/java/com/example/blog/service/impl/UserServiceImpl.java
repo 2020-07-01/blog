@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
             log.error("用户不存在");
             return false;
         } else {
-            log.info("查询用户");
+            log.info("用户存在");
             return true;
         }
     }

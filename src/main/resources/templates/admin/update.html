@@ -48,7 +48,7 @@
 </head>
 <body>
 <!--引入首部部分-->
-<div th:include="/common/head :: top"></div>
+<div th:include="common/head :: top"></div>
 
 <form class="form-inline" method="post" th:action="@{/admin/update}" th:object="${article}">
 
@@ -120,7 +120,7 @@
         <div class="col-md-6 col-md-offset-6">
             <p>
                 <button class="btn btn-primary btn-lg" role="button">更新博客</button>
-                <!--<input type="submit" class="btn btn-primary btn-lg" role="button" value="发表">-->
+
             </p>
         </div>
     </div>

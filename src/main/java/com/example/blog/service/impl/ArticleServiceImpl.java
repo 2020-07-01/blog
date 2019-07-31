@@ -37,6 +37,7 @@ public class ArticleServiceImpl implements ArticleService {
      */
     public List<Article> selectAll() {
         List<Article> articleList = articleDao.selectAll();
+        log.info("查询所有博客成功");
         return articleList;
     }
 

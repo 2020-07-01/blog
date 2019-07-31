@@ -46,6 +46,9 @@ public class ArticleController {
      */
     @RequestMapping(value = "/column/{displayName}/{category_cId}")
     public String column(@PathVariable String displayName, @PathVariable String category_cId, Model model) {
+
+
+
         //根据category——cId查询所有的博客
         List<Article> articleList = articleService.selectAllByCategory(category_cId);
 

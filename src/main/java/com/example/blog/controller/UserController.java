@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * @author :qiang
  * @date :2019/7/11 下午9:28
- * @description :用户信息控制类
+ * @description :用户主要操作类
  * @other :
  */
 
@@ -49,15 +49,15 @@ public class UserController {
      *
      * @return
      */
-    @RequestMapping(value = "")
+    @RequestMapping(value = "/index")
     public String admin(Model model, @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum
             , @RequestParam(defaultValue = "9", value = "pageSize") Integer pageSize) {
-
 
         PageHelper.startPage(pageNum, pageSize);
         try {
             List<Article> articleList = articleService.selectAll();
-            PageInfo<Article> pageInfo = new PageInfo<Article>(articleList);
+            PageInfo<Article> pageInfo = new PageInfo<>(articleList);
+
             model.addAttribute("pageInfo", pageInfo);
         } catch (Exception e) {
             System.out.println(e);
@@ -74,6 +74,7 @@ public class UserController {
      */
     @RequestMapping(value = "/login")
     public String login() {
+        log.info("进入登陆界面");
         return "admin/login";
     }
 
@@ -85,11 +86,13 @@ public class UserController {
      */
     @RequestMapping(value = "/dologin", method = RequestMethod.POST)
     public String doLogin(User user) {
-
+        log.info("接受用户输入的用户名和密码：" + user.toString());
         //如果可以获取到用户名和密码则成功否则失败
         if (userService.getUser(user.getUserName(), user.getUserPassword())) {
-            return "redirect:/admin";
+            log.info("用户验证成功");
+            return "redirect:/admin/index";
         } else {
+            log.info("用户验证失败");
             return "admin/login";
         }
     }
@@ -123,7 +126,7 @@ public class UserController {
     public String deleteBlog(@RequestParam("aId") String aId) {
 
         articleService.deleteBlog(aId);
-        return "redirect:/admin";
+        return "redirect:/admin/index";
     }
 
 
@@ -157,25 +160,22 @@ public class UserController {
      */
     @RequestMapping(value = "/update")
     public String update(Article article) {
-        System.out.println(article.toString());
 
         articleService.updateBlog(article);
-        return "redirect:";
+        return "redirect:/admin/index";
     }
 
-    /* *
+    /**
      * 保存博客模块
      *
      * @param article
-     * @return*/
-
+     * @return
+     */
     @RequestMapping(value = "/save")
     public String save(Article article) {
-        System.out.println(article.toString());
-
         //保存博客信息
         articleService.saveBlog(article);
-        return "redirect:";
+        return "redirect:/admin/index";
     }
 
 

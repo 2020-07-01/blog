@@ -26,9 +26,8 @@
         }
     }
 </script>
-
 <!--引入头部-->
-<div th:include="/common/head :: top"></div>
+<div th:include="common/head :: top"></div>
 
 <!--写博客和模糊查询-->
 <div class="container-fluid">
@@ -38,23 +37,23 @@
             <a class="btn btn-primary btn-sm" th:href="@{/admin/write}" role="button">写博客</a>
         </div>
 
-        <span></span>
+        <!-- <span></span>
 
-        <!--<div class="form-group col-md-3">
-            <label for="f1">类型</label>
-            <input type="text" id="f1" name="name" class="form-control" placeholder="请输入类型"/>
-        </div>
+         <div class="form-group col-md-3">
+             <label for="f1">类型</label>
+             <input type="text" id="f1" name="name" class="form-control" placeholder="请输入类型"/>
+         </div>
 
-        <div class="form-group col-md-3">
-            <label for="f2">关键字</label>
-            <input type="text" id="f2" name="professional" class="form-control" placeholder="请输入关键字"/>
-        </div>
+         <div class="form-group col-md-3">
+             <label for="f2">关键字</label>
+             <input type="text" id="f2" name="professional" class="form-control" placeholder="请输入关键字"/>
+         </div>
 
-        <div class="form-group col-md-3">
-            <div class="col-sm-offset-2 col-sm-10">
-                <input type="submit" value="查询" class="btn btn-info"/>
-            </div>
-        </div>-->
+         <div class="form-group col-md-3">
+             <div class="col-sm-offset-2 col-sm-10">
+                 <input type="submit" value="查询" class="btn btn-info"/>
+             </div>
+         </div>-->
     </form>
 
 </div>
@@ -104,13 +103,17 @@
         </div>
         <div class="col-xs-6">
             <ul class="pagination" style="float:right">
-                <li><a th:href="@{/admin}">首页</a></li>
-                <li><a th:href="@{/(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a>
+                <li><a th:href="@{/admin/index}">首页</a></li>
+                <!--
+                    此此出使用三元表达式
+                    如果有上一页则返回上一页的页码数，否则返回1,表示第一页
+                -->
+                <li><a th:href="@{/admin/index/(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a>
                 </li>
                 <li>
-                    <a th:href="@{/admin/(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a>
+                    <a th:href="@{/admin/index/(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a>
                 </li>
-                <li><a th:href="@{/getAllPerson(pageNum=${pageInfo.pages})}">尾页</a></li>
+                <li><a th:href="@{/admin/index/(pageNum=${pageInfo.pages})}">尾页</a></li>
             </ul>
         </div>
     </div>

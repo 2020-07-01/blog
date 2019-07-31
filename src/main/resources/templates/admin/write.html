@@ -42,7 +42,7 @@
 </head>
 <body>
 <!--引入首部部分-->
-<div th:include="/common/head :: top"></div>
+<div th:include="common/head :: top"></div>
 
 <div class="container">
     <form class="form-inline" method="post" th:action="@{/admin/save}" th:object="${article1}">
