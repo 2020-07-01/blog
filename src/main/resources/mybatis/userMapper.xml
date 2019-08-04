@@ -24,4 +24,15 @@
     </select>
 
 
+<!--
+    &lt;!&ndash;注册用户&ndash;&gt;
+    <insert id="saveUser" parameterType="com.example.demonote.model.User">
+        insert into user (user_id,username,password)
+        values (#{userId,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR})
+
+
+    </insert>
+-->
+
+
 </mapper>

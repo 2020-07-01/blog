@@ -20,50 +20,53 @@
 <body>
 
 
-<div th:fragment="top">
+<div class="container">
 
-    <div class="row">
-        <nav class="navbar navbar-inverse">
-            <div class="container">
+    <div th:fragment="top">
 
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false"/>
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" th:href="@{/admin/index}">于强的专栏</a>
-                </div>
+        <div class="row">
+            <nav class="navbar navbar-inverse">
+                <div class="container">
+
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1" aria-expanded="false"/>
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" th:href="@{/admin/index}">于强的专栏</a>
+                    </div>
 
 
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav" id="nv1">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav" id="nv1">
 
-                        <li class="active" id="firstPage"><a th:href="@{/admin/index}">首页</a></li>
-                        <li id="javaPage"><a th:href="@{/article/column/Java专栏/1}">Java专栏</a></li>
-                        <li id="computerPage"><a th:href="@{/article/column/计算机基础专栏/2}">计算机基础专栏</a>
-                        </li>
-                        <li id="DSAPage"><a th:href="@{/article/column/数据结构与算法专栏/3}">数据结构与算法专栏</a></li>
-                        <li id="notePage"><a th:href="@{/article/column/内功修炼专栏/4}">内功修炼专栏</a></li>
-                    </ul>
+                            <li class="active" id="firstPage"><a th:href="@{/admin/index}">首页</a></li>
+                            <li id="javaPage"><a th:href="@{/article/column/Java专栏/1}">Java专栏</a></li>
+                            <li id="computerPage"><a th:href="@{/article/column/计算机基础专栏/2}">计算机基础专栏</a>
+                            </li>
+                            <li id="DSAPage"><a th:href="@{/article/column/数据结构与算法专栏/3}">数据结构与算法专栏</a></li>
+                            <li id="notePage"><a th:href="@{/article/column/内功修炼专栏/4}">内功修炼专栏</a></li>
+                        </ul>
 
-                    <form class="navbar-form navbar-right" th:action="@{/article/search}">
+                        <form class="navbar-form navbar-right" th:action="@{/article/search}">
 
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="搜索" name="key"/>
-                            <span class="input-group-btn">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="搜索" name="key"/>
+                                <span class="input-group-btn">
         <button class="btn btn-default" type="submit">Go!</button>
       </span>
-                        </div>
-                    </form>
+                            </div>
+                        </form>
 
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </div>
+            </nav>
+        </div>
 
+    </div>
 </div>
 
 </body>
