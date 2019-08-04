@@ -33,7 +33,7 @@ public class UserAdmin {
     @RequestMapping(value = "/register")
     public String register() {
         log.info("进入注册页面");
-        return "register";
+        return "admin/register";
     }
 
     /**
