@@ -22,13 +22,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
 
+
     /**
-     * 根据用户名和密码查询用户信息
+     * 验证用户信息
      *
      * @param userName
      * @param userPassword
-     * @return
+     * @return 验证成功返回true，失败返回false
      */
+    @Override
     public boolean getUser(String userName, String userPassword) {
 
         User user = userDao.selectUserByNP(userName, userPassword);
@@ -42,4 +44,23 @@ public class UserServiceImpl implements UserService {
             return true;
         }
     }
+
+    /**
+     * 注册信息用户
+     *
+     * @param user
+     * @return 注册成功返回true，失败返回false
+     */
+    @Override
+    public boolean registerUser(User user) {
+        Integer row = userDao.insertUser(user);
+        if (row == 1) {
+            log.info("用户注册成功");
+            return true;
+        } else {
+            log.info("用户注册失败");
+            return false;
+        }
+    }
+
 }

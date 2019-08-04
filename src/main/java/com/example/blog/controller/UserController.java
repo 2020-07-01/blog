@@ -45,6 +45,18 @@ public class UserController {
 
 
     /**
+     * 进入登陆页面
+     *
+     * @return
+     */
+    @RequestMapping(value = "/login")
+    public String login() {
+        log.info("进入登陆页面");
+        return "admin/login";
+    }
+
+
+    /**
      * 默认进入后台主页
      *
      * @return
@@ -65,36 +77,6 @@ public class UserController {
 
         log.info("分页成功");
         return "admin/index";
-    }
-
-    /**
-     * 登陆模块
-     *
-     * @return
-     */
-    @RequestMapping(value = "/login")
-    public String login() {
-        log.info("进入登陆界面");
-        return "admin/login";
-    }
-
-    /**
-     * 登陆验证模块，验证成功后跳转至后台主页,否则跳转到登陆界面
-     *
-     * @param user
-     * @return
-     */
-    @RequestMapping(value = "/dologin", method = RequestMethod.POST)
-    public String doLogin(User user) {
-        log.info("接受用户输入的用户名和密码：" + user.toString());
-        //如果可以获取到用户名和密码则成功否则失败
-        if (userService.getUser(user.getUserName(), user.getUserPassword())) {
-            log.info("用户验证成功");
-            return "redirect:/admin/index";
-        } else {
-            log.info("用户验证失败");
-            return "admin/login";
-        }
     }
 
 

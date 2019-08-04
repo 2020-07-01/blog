@@ -54,7 +54,7 @@ user表：
  a_id | varchar | 24 | N | Y | 博客id
  title | varchar | 50|N | N | 博客标题
  category | varchar | 24 | N | N | 博客类型 
- content | text | 65535 | N | N | 博客内容
+ content | mediumtext |  | N | N | 博客内容
  summary | varcahr | 40 | N | N | 博客摘要
  create_date |  varchar  | 24 | N | N | 创建时间
  edite_date | varchar | 24 |  Y | N | 修改时间 
@@ -76,6 +76,16 @@ VALUES ('1', 'javaPage', 'Java专栏'),
        ('3', 'DSAPage', '数据结构与算法'),
        ('4', 'notePage', '内功修炼')
 ```
+
+
+
+# 问题
+
+1. 在mysql5.0版本之后varchar类型存储的是字符，与字符编码无关，与中英文数字无关
+
+2. 关于mysql中varchar编码限制与行限制的关系
+
+
 
 未完。。。
 
