@@ -44,6 +44,13 @@ public class UserController {
     CategoryService categoryService;
 
 
+    @RequestMapping(value = "/test")
+    public String test(){
+        return "admin/index";
+    }
+
+
+
     /**
      * 进入登陆页面
      *
@@ -72,7 +79,7 @@ public class UserController {
 
             model.addAttribute("pageInfo", pageInfo);
         } catch (Exception e) {
-            System.out.println(e);
+            log.info(e.toString());
         }
 
         log.info("分页成功");

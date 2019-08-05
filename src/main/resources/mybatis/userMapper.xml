@@ -7,12 +7,14 @@
 
     <resultMap id="resultMap" type="com.example.blog.entity.User">
 
-        <result column="user_name" property="userName"/>
-        <result column="user_password" property="userPassword"/>
+        <id column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="register_date" property="registerDate" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="base_sql">
-        user_name,user_password
+        user_id,user_name,password,register_date
     </sql>
 
     <!--查询用户账号-->
@@ -20,19 +22,17 @@
         select
         <include refid="base_sql"/>
         from user
-        where user_name = #{userName,jdbcType=VARCHAR} and user_password = #{userPassword,jdbcType=VARCHAR}
+        where user_name = #{userName,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
     </select>
 
 
-<!--
-    &lt;!&ndash;注册用户&ndash;&gt;
-    <insert id="saveUser" parameterType="com.example.demonote.model.User">
-        insert into user (user_id,username,password)
-        values (#{userId,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR})
+    <!--注册用户-->
+    <insert id="insertUser" parameterType="com.example.blog.entity.User">
 
+        insert into user (user_id,user_name,password,register_date)
+        values (#{userId,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{registerDate,jdbcType=VARCHAR})
 
     </insert>
--->
 
 
 </mapper>

@@ -3,6 +3,8 @@ package com.example.blog.service.impl;
 import com.example.blog.dao.UserDao;
 import com.example.blog.entity.User;
 import com.example.blog.service.UserService;
+import com.example.blog.support.DateSupport;
+import com.example.blog.support.UUIDSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +29,13 @@ public class UserServiceImpl implements UserService {
      * 验证用户信息
      *
      * @param userName
-     * @param userPassword
+     * @param password
      * @return 验证成功返回true，失败返回false
      */
     @Override
-    public boolean getUser(String userName, String userPassword) {
+    public boolean getUser(String userName, String password) {
 
-        User user = userDao.selectUserByNP(userName, userPassword);
+        User user = userDao.selectUserByNP(userName, password);
 
         //判断是否可以查询到用户
         if (user == null) {
@@ -45,6 +47,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+
     /**
      * 注册信息用户
      *
@@ -53,6 +56,9 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean registerUser(User user) {
+        user.setUserId(UUIDSupport.getUUID());
+        user.setRegisterDate(DateSupport.getDate());
+
         Integer row = userDao.insertUser(user);
         if (row == 1) {
             log.info("用户注册成功");

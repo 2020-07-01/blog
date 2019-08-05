@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 
 public class User {
 
+    private String userId;
 
     /*
      * desc：用户名
@@ -27,8 +28,19 @@ public class User {
      * dataType:String
      *
      */
-    private String userPassword;
+    private String password;
 
+
+    private String registerDate;
+
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getUserName() {
         return userName;
@@ -38,20 +50,34 @@ public class User {
         this.userName = userName;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(String registerDate) {
+        this.registerDate = registerDate;
     }
 
 
     @Override
     public String toString() {
         return "User{" +
-                "userName='" + userName + '\'' +
-                ", userPassword='" + userPassword + '\'' +
+                "userId='" + userId + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", registerDate='" + registerDate + '\'' +
                 '}';
     }
 }
+
+
+
+

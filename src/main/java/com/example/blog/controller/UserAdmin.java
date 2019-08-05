@@ -44,6 +44,7 @@ public class UserAdmin {
      */
     @RequestMapping(value = "/toregister")
     public String toRegister(User user) {
+
         boolean result = userService.registerUser(user);
         if (result) {
             return "redirect:/admin/login";
@@ -63,7 +64,7 @@ public class UserAdmin {
     public String doLogin(User user) {
         log.info("接受用户输入的用户名和密码：" + user.toString());
         //如果可以获取到用户名和密码则成功否则失败
-        if (userService.getUser(user.getUserName(), user.getUserPassword())) {
+        if (userService.getUser(user.getUserName(), user.getPassword())) {
             log.info("用户验证成功");
             return "redirect:/admin/index";
         } else {
