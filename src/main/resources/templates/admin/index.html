@@ -32,68 +32,36 @@
 <!--引入头部-->
 <div class="container" th:include="common/head :: top"></div>
 
-<!--
-写博客和模糊查询
-<div class="container">
-
-    <form class="form-inline">
-        <div class="form-group col-md-3">
-            <a class="btn btn-primary btn-sm" th:href="@{/admin/write}" role="button">写博客</a>
-        </div>
-
-        &lt;!&ndash; <span></span>
-
-         <div class="form-group col-md-3">
-             <label for="f1">类型</label>
-             <input type="text" id="f1" name="name" class="form-control" placeholder="请输入类型"/>
-         </div>
-
-         <div class="form-group col-md-3">
-             <label for="f2">关键字</label>
-             <input type="text" id="f2" name="professional" class="form-control" placeholder="请输入关键字"/>
-         </div>
-
-         <div class="form-group col-md-3">
-             <div class="col-sm-offset-2 col-sm-10">
-                 <input type="submit" value="查询" class="btn btn-info"/>
-             </div>
-         </div>&ndash;&gt;
-    </form>
-
-</div>
-<br/>-->
-
 <br/>
 <br/>
 <br/>
 <br/>
+
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
 
-
             <div class="table-responsive">
                 <table class="table">
                     <thead>
-                    <tr>
-                        <td>编号</td>
-                        <td>标题</td>
-                        <td>摘要</td>
-                        <td>发表时间</td>
-                        <td>操作</td>
+                    <tr class="text-center">
+                        <th>编号</th>
+                        <th>标题</th>
+                        <th>摘要</th>
+                        <th>发表时间</th>
+                        <th class="text-center">操作</th>
                     </tr>
 
                     </thead>
+
                     <tbody>
 
                     <tr th:each="article:${pageInfo.list}">
                         <td th:text="${article.aId}"></td>
                         <td th:text="${article.title}"></td>
-                        <td  th:text="${article.summary}"></td>
+                        <td th:text="${article.summary}"></td>
                         <td th:text="${article.createDate}"></td>
-
                         <td>
-
                             <a th:href="@{/admin/updateBlog (aId = ${article.aId})}">
                                 <button type="button" class="btn btn-sm">修改</button>
                             </a>
@@ -107,82 +75,36 @@
                     </tbody>
                 </table>
             </div>
+        </div>
 
+        <div class="row clearfix">
+            <div class="col-md-6 column">
+                <div class="col-xs-5" style="float:left">
+                    <br/>
+                    <p>当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span>
+                        页,共 <span
+                                th:text="${pageInfo.total}"></span> 条记录</p>
+                </div>
+            </div>
+
+
+            <div class="col-md-6 column">
+                <ul class="pagination" style="float:right">
+                    <li><a th:href="@{/admin/index}">首页</a></li>
+                    <li>
+                        <a th:href="@{/admin/index/(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/admin/index/(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a>
+                    </li>
+                    <li><a th:href="@{/admin/index/(pageNum=${pageInfo.pages})}">尾页</a></li>
+                </ul>
+            </div>
         </div>
     </div>
+
+
 </div>
-
-
-<!--<div class="container">
-    <div class="row clearfix">
-        <div class="col-md-12 column">
-
-            <table class="table">
-
-                <thead>
-                <tr class="info">
-                    <td style="width: 150px">编号</td>
-                    <td style="width:25%">标题</td>
-                    <td style="width:25%">摘要</td>
-                    <td>发表时间</td>
-                    <td>操作</td>
-                </tr>
-                </thead>
-
-                </tr>
-                <tr>
-                </tr>
-
-                <tr th:each="article:${pageInfo.list}">
-                    <td style="width: 150px" th:text="${article.aId}"></td>
-                    <td style="width:25%" th:text="${article.title}"></td>
-                    <td style="width:25%" th:text="${article.summary}"></td>
-                    <td th:text="${article.createDate}"></td>
-
-                    <td>
-
-                        <a th:href="@{/admin/updateBlog (aId = ${article.aId})}">
-                            <button type="button" class="btn btn-info btn-xs">修改</button>
-                        </a>
-                        <label>&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                        <a onclick="return del()" th:href="@{/admin/delete (aId = ${article.aId})}">
-                            <button type="button" class="btn btn-danger btn-xs">删除</button>
-                        </a>
-                    </td>
-
-
-                </tr>
-            </table>
-
-
-        </div>
-    </div>
-
-
-    <div class="navbar navbar-fixed-bottom">
-        <div class="col-xs-5" style="float:left">
-            <br/>
-            <p>当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span> 页,共 <span
-                    th:text="${pageInfo.total}"></span> 条记录</p>
-        </div>
-        <div class="col-xs-6">
-            <ul class="pagination" style="float:right">
-                <li><a th:href="@{/admin/index}">首页</a></li>
-                &lt;!&ndash;
-                此此出使用三元表达式
-                如果有上一页则返回上一页的页码数，否则返回1,表示第一页
-                &ndash;&gt;
-                <li><a th:href="@{/admin/index/(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/index/(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a>
-                </li>
-                <li><a th:href="@{/admin/index/(pageNum=${pageInfo.pages})}">尾页</a></li>
-            </ul>
-        </div>
-    </div>
-</div>-->
-
 
 </body>
 </html>

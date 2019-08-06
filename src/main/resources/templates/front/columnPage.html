@@ -4,32 +4,41 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>columnPage</title>
 
     <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
 <!--引入首部部分-->
 <div th:include="common/head :: top"></div>
 
+<br>
+<br>
+<br>
+<br>
+
 <div class="container">
-    <div th:each="article:${articleList}">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title" th:text="${article.title}"></h3>
-            </div>
-            <div class="panel-body">
-                <h4 th:text="${article.summary}"></h4>
-                <p><a class="btn btn-primary btn-lg" th:href="@{'/article/detail/'+${article.aId}}"
-                      role="button">阅读全文</a></p>
+    <div class="row clearfix">
+        <div th:each="article:${articleList}">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" th:text="${article.title}"></h3>
+                </div>
+
+                <div class="panel-body">
+                    <h4 th:text="${article.summary}"></h4>
+                    <br>
+                    <p><a class="btn btn-large btn-default" th:href="@{'/article/detail/'+${article.aId}}"
+                          role="button">阅读全文</a></p>
+                </div>
             </div>
         </div>
     </div>

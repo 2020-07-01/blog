@@ -46,7 +46,7 @@ public class UserController {
 
     @RequestMapping(value = "/test")
     public String test(){
-        return "admin/index";
+        return "admin/login";
     }
 
 
