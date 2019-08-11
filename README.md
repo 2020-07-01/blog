@@ -5,49 +5,59 @@
 -- sql代码 --
 
 --  创建用户表 --
-create table if not exists user
+CREATE TABLE `user`
 (
-    `user_name`     varchar(24) not null comment '用户名',
-    `user_password` varchar(24) not null comment '用户密码',
-    primary key (`user_name`)
-) default charset = utf8;
+    `uuid`          varchar(24) NOT NULL COMMENT '用户id',
+    `user_name`     varchar(24) NOT NULL COMMENT '用户名',
+    `user_password` varchar(24) NOT NULL COMMENT '用户密码',
+    `phone`         varchar(11) NOT NULL COMMENT '手机号',
+    `create_date`   varchar(24) NOT NULL,
+    `edit_date`     varchar(24) NOT NULL,
+    PRIMARY KEY (`uuid`),unique (`user_name`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8  
 
 -- 创建博客表 --
-create table if not exists article
+CREATE TABLE `article`
 (
-    `a_id`        varchar(24)    not null comment '博客id',
-    `title`       varchar(50)    not null comment '博客标题',
-    `category`    varchar(24)    not null comment '博客类型id',
-    `content`     text(65535) not null comment '博客内容',
-    `summary`     varchar(40)    not null comment '博客摘要',
-    `create_date` varchar(24)    not null comment '创建时间',
-    `edit_date`   varchar(24)   default null comment '修改时间',
-    primary key (`a_id`)
-) default charset = utf8;
+    `a_id`        varchar(24) NOT NULL COMMENT '博客id',
+    `title`       varchar(50) NOT NULL COMMENT '博客标题',
+    `category`    varchar(24) NOT NULL COMMENT '博客类型id',
+    `content`     text        NOT NULL COMMENT '博客内容',
+    `summary`     varchar(40) NOT NULL COMMENT '博客摘要',
+    `create_date` varchar(24) NOT NULL COMMENT '创建时间',
+    `edit_date`   varchar(24) DEFAULT NULL COMMENT '修改时间',
+    PRIMARY KEY (`a_id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8 
 
 -- 创建博客类型表 --
-create table if not exists category
+CREATE TABLE `category`
 (
-    `c_id`          varchar(24) not null comment '博客类型id',
-    `category_name` varchar(24) not null comment '博客类型',
-    `display_name`  varchar(24) not null comment '显示类型',
-    primary key (`c_id`)
-) default charset = utf8;
-
+    `c_id`          varchar(24) NOT NULL COMMENT '博客类型id',
+    `category_name` varchar(24) NOT NULL COMMENT '博客类型',
+    `display_name`  varchar(24) NOT NULL COMMENT '显示类型',
+    PRIMARY KEY (`c_id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8   
 
 ```
 
 表结构设计：用户表user，博客表article，和类别表category
 
-user表：
+**user表**：
 
 字段名 | 类型 | 长度 | nulll | 主键 | 注释 
 ---------|----------|---------|---------|---------|---------
- user_name | varchar | 24 | N | Y | 用户名
+uuid | varchar | 24 | N | Y | id 
+ user_name | varchar | 24 | N | N | 用户名
  user_password | varchar | 24 | N | N  | 用户密码
+ create_date | varchar | 24 | N | N  |创建时间
+  edit_date | varchar | 24 | N | N | 修改时间
 
 
- article表：
+**article表**：
+
 
  字段名 | 类型 | 长度 |  null  | 主键 | 注释
 ---------|----------|---------|---------|---------|---------
@@ -59,7 +69,7 @@ user表：
  create_date |  varchar  | 24 | N | N | 创建时间
  edite_date | varchar | 24 |  Y | N | 修改时间 
 
-category表：
+**category表**：
 
 字段名 | 类型 | 长度 |  null |  主键 | 注释
 ---------|----------|---------|---------|---------|---------
