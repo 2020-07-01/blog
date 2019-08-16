@@ -74,4 +74,11 @@ public class UserAdmin {
     }
 
 
+    //退出登陆操作
+    public String logout(){
+        return "";
+    }
+
+
+
 }
