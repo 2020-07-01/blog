@@ -13,4 +13,7 @@ public interface UserDao {
     // 注册用户
     Integer insertUser(User user);
 
+    //根据用户名查询用户是否存在
+    User selectUserByUN(String userName);
+
 }

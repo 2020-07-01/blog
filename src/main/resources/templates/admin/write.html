@@ -31,7 +31,6 @@
                 path: "../editormd/lib/"
             });
         });
-
     </script>
 
     <script th:inline="javascript">
@@ -92,7 +91,7 @@
 
                             <!--显示博客类型，-->
                             <input name="category" class="form-control" id="categoryInput"
-                                   type="text"
+                                   type="text" placeholder="请点击左侧选择博客类型"
                                    th:field="*{category.categoryName}"/>
                         </div>
                     </div>

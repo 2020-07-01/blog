@@ -16,6 +16,16 @@ public class User {
     private String registerDate;
     private String editDate;
 
+    public User() {
+
+    }
+
+    public User(String userName, String userPassword) {
+        this.userName = userName;
+        this.userPassword = userPassword;
+    }
+
+
     public String getUuid() {
         return uuid;
     }

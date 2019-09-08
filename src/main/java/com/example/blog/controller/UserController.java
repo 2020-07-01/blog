@@ -14,7 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -40,14 +44,6 @@ public class UserController {
     @Autowired
     CategoryService categoryService;
 
-
-    @RequestMapping(value = "/test")
-    public String test(){
-        return "admin/login";
-    }
-
-
-
     /**
      * 进入登陆页面
      *
@@ -59,7 +55,6 @@ public class UserController {
         return "admin/login";
     }
 
-
     /**
      * 默认进入后台主页
      *
@@ -67,22 +62,26 @@ public class UserController {
      */
     @RequestMapping(value = "/index")
     public String admin(Model model, @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum
-            , @RequestParam(defaultValue = "9", value = "pageSize") Integer pageSize) {
+            , @RequestParam(defaultValue = "9", value = "pageSize") Integer pageSize, HttpServletResponse response, HttpServletRequest request) {
 
-        PageHelper.startPage(pageNum, pageSize);
-        try {
-            List<Article> articleList = articleService.selectAll();
-            PageInfo<Article> pageInfo = new PageInfo<>(articleList);
+        //如果cookie不为空则继续执
+        if (request.getCookies() != null) {
+            PageHelper.startPage(pageNum, pageSize);
+            try {
+                List<Article> articleList = articleService.selectAll();
 
-            model.addAttribute("pageInfo", pageInfo);
-        } catch (Exception e) {
-            log.info(e.toString());
-        }
+                PageInfo<Article> pageInfo = new PageInfo<>(articleList);
 
-        log.info("分页成功");
-        return "admin/index";
+                model.addAttribute("pageInfo", pageInfo);
+            } catch (Exception e) {
+                log.info(e.toString());
+            }
+
+            log.info("分页成功");
+            return "admin/index";
+        } else
+            return "admin/login";
     }
-
 
     /**
      * 进入写博客界面
@@ -90,7 +89,9 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/write")
-    public String write(Model model) {
+    public String write(Model model, HttpServletRequest request, HttpServletResponse response) {
+        //获取请求中的cookie数组
+        Cookie[] cookie = request.getCookies();
 
         //查询所有的类别信息传送到前端
         List<Category> categories = categoryService.selectAll();
@@ -103,18 +104,26 @@ public class UserController {
 
     /**
      * 删除博客模块
+     * 删除博客时要根据cookie判断用户是否有权限
      *
      * @param aId：接受前端返回的博客id
      * @return ：重定向到index页面
      */
-
     @RequestMapping(value = "/delete")
-    public String deleteBlog(@RequestParam("aId") String aId) {
+    public String deleteBlog(@RequestParam("aId") String aId
+            , HttpServletResponse response
+            , HttpServletRequest request) {
 
-        articleService.deleteBlog(aId);
-        return "redirect:/admin/index";
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("yq")) {
+                articleService.deleteBlog(aId);
+                return "redirect:/admin/index";
+            }
+        }
+        return "other/errorcard";
+
     }
-
 
     /**
      * 进入更新博客页面

@@ -66,8 +66,16 @@
                 #{editDate,jdbcType = VARCHAR}
             </if>
         </trim>
-
     </insert>
+
+
+    <!--根据用户名查询用户信息-->
+    <select id="selectUserByUN" parameterType="String" resultMap="resultMap">
+        select
+        <include refid="base_sql"/>
+        from user
+        where user_name = #{userName,jdbcType=VARCHAR}
+    </select>
 
 
 </mapper>

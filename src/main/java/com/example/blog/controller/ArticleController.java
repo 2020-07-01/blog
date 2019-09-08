@@ -21,7 +21,6 @@ import java.util.List;
 @RequestMapping(value = "/article")
 public class ArticleController {
 
-
     @Autowired
     ArticleService articleService;
 
@@ -36,7 +35,6 @@ public class ArticleController {
     }
 
 
-
     /**
      * 按类型显示博客
      *
@@ -47,8 +45,6 @@ public class ArticleController {
      */
     @RequestMapping(value = "/column/{displayName}/{category_cId}")
     public String column(@PathVariable String displayName, @PathVariable String category_cId, Model model) {
-
-
 
         //根据category——cId查询所有的博客
         List<Article> articleList = articleService.selectAllByCategory(category_cId);
@@ -61,7 +57,7 @@ public class ArticleController {
     //头部的查寻功能
     @RequestMapping(value = "/search")
     public String search(@RequestParam("key") String key, Model model) {
-        System.out.println(key);
+
         List<Article> articleList = articleService.search(key);
 
         for (Article article : articleList) {

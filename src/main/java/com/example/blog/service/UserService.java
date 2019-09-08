@@ -10,5 +10,8 @@ public interface UserService {
     // 注册用户信息
     boolean registerUser(User user);
 
+    //根据用户名查询用户信息
+    boolean selectUser(String userName);
+
 
 }

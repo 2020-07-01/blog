@@ -71,4 +71,18 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * 根据用户名查询用户是否存在
+     *
+     * @param userName
+     * @return
+     */
+    @Override
+    public boolean selectUser(String userName) {
+        if (userDao.selectUserByUN(userName) != null) {
+            return true;
+        }
+        return false;
+    }
+
 }
