@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 public interface UserDao {
 
     // 根据用户名和密码查询用户
-    User selectUserByNP(@Param("userName") String userName, @Param("password") String password);
+    User selectUserByNP(@Param("userName") String userName, @Param("userPassword") String password);
 
     // 注册用户
     Integer insertUser(User user);

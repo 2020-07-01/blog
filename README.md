@@ -47,13 +47,13 @@ CREATE TABLE `category`
 
 **user表**：
 
-字段名 | 类型 | 长度 | nulll | 主键 | 注释 
----------|----------|---------|---------|---------|---------
-uuid | varchar | 24 | N | Y | id 
- user_name | varchar | 24 | N | N | 用户名
- user_password | varchar | 24 | N | N  | 用户密码
- create_date | varchar | 24 | N | N  |创建时间
-  edit_date | varchar | 24 | N | N | 修改时间
+字段名| 属性名 | 类型 | 长度 | nulll | PRI | UNI | 注释  
+---------|----------|---------|---------|---------|---------|---------|---------
+uuid | uuid | varchar | 24 | N | Y | N | id 
+ user_name |  userName | varchar | 24 | N | N |  Y | 用户名
+ user_password | userPassword | varchar | 24 | N | N | N  | 用户密码
+ register_date | registerDate  | varchar | 24 | N | N | N  |创建时间
+  edit_date | editDate | varchar | 24 | N | N |N |  修改时间
 
 
 **article表**：
@@ -86,6 +86,11 @@ VALUES ('1', 'javaPage', 'Java专栏'),
        ('3', 'DSAPage', '数据结构与算法'),
        ('4', 'notePage', '内功修炼')
 ```
+
+
+
+
+
 
 
 

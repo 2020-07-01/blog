@@ -56,8 +56,10 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean registerUser(User user) {
-        user.setUserId(UUIDSupport.getUUID());
+
+        user.setUuid(UUIDSupport.getUUID());
         user.setRegisterDate(DateSupport.getDate());
+        user.setEditDate(DateSupport.getDate());
 
         Integer row = userDao.insertUser(user);
         if (row == 1) {

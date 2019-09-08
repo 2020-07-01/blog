@@ -11,6 +11,7 @@
 
     <!--结果映射-->
     <resultMap id="resultMap" type="com.example.blog.entity.Category">
+
         <id column="c_id" property="cId" jdbcType="VARCHAR"/>
         <result column="category_name" property="categoryName" jdbcType="VARCHAR"/>
         <result column="display_name" property="displayName" jdbcType="VARCHAR"/>

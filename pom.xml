@@ -61,11 +61,11 @@
             <version>1.4.1</version>
         </dependency>
 
-        <!--添加spring secutiry的支持-->
+        <!--&lt;!&ndash;添加spring secutiry的支持&ndash;&gt;
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+        </dependency>-->
 
         <!--添加分页插件-->
         <dependency>

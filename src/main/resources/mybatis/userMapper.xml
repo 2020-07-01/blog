@@ -4,17 +4,17 @@
 
 <mapper namespace="com.example.blog.dao.UserDao">
 
-
     <resultMap id="resultMap" type="com.example.blog.entity.User">
 
-        <id column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <id column="uuid" property="uuid" jdbcType="VARCHAR"/>
         <result column="user_name" property="userName" jdbcType="VARCHAR"/>
-        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="user_password" property="userPassword" jdbcType="VARCHAR"/>
         <result column="register_date" property="registerDate" jdbcType="VARCHAR"/>
+        <result column="edit_date" property="editDate" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="base_sql">
-        user_id,user_name,password,register_date
+        uuid,user_name,user_password,register_date,edit_date
     </sql>
 
     <!--查询用户账号-->
@@ -22,15 +22,50 @@
         select
         <include refid="base_sql"/>
         from user
-        where user_name = #{userName,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+        where user_name = #{userName,jdbcType=VARCHAR} and user_password = #{userPassword,jdbcType=VARCHAR}
     </select>
 
 
     <!--注册用户-->
     <insert id="insertUser" parameterType="com.example.blog.entity.User">
 
-        insert into user (user_id,user_name,password,register_date)
-        values (#{userId,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{registerDate,jdbcType=VARCHAR})
+        insert into user
+
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="userPassword != null">
+                user_password,
+            </if>
+            <if test="registerDate != null">
+                register_date,
+            </if>
+            <if test="editDate != null">
+                edit_date
+            </if>
+        </trim>
+
+        <trim prefix="value (" suffix=")" prefixOverrides=",">
+            <if test="uuid != null">
+                #{uuid,jdbcType = VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType = VARCHAR},
+            </if>
+            <if test="userPassword != null">
+                #{userPassword,jdbcType = VARCHAR},
+            </if>
+            <if test="registerDate != null">
+                #{registerDate,jdbcType = VARCHAR},
+            </if>
+            <if test="editDate != null">
+                #{editDate,jdbcType = VARCHAR}
+            </if>
+        </trim>
 
     </insert>
 

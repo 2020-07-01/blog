@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.Cookie;
+
 /**
  * @author :qiang
  * @date :2019/8/4 下午7:25
@@ -44,9 +46,10 @@ public class UserAdmin {
      */
     @RequestMapping(value = "/toregister")
     public String toRegister(User user) {
-
+        log.info(user.toString());
         boolean result = userService.registerUser(user);
         if (result) {
+            log.info("用户："+user.getUserName()+"注册成功");
             return "redirect:/admin/login";
         } else {
             return "redirect:/adminUser/register";
@@ -64,8 +67,14 @@ public class UserAdmin {
     public String doLogin(User user) {
         log.info("接受用户输入的用户名和密码：" + user.toString());
         //如果可以获取到用户名和密码则成功否则失败
-        if (userService.getUser(user.getUserName(), user.getPassword())) {
+        if (userService.getUser(user.getUserName(),user.getUserPassword())) {
             log.info("用户验证成功");
+
+            //创建cookie
+            Cookie cookie = new Cookie(user.getUserName(),user.getUserPassword());
+            //加入cookie
+
+
             return "redirect:/admin/index";
         } else {
             log.info("用户验证失败");

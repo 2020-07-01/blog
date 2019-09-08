@@ -54,24 +54,25 @@
 
         <div class="col-md-5 column">
             <div class="jumbotron">
+
                 <form role="form" action="/adminUser/toregister" method="post">
                     <!--用户名-->
                     <div class="form-group">
                         <label for="userName">UserName</label>
                         <input type="text" class="form-control" id="userName" name="userName"/>
                     </div>
-
-                    <!--手机号-->
+<!--
+                    &lt;!&ndash;手机号&ndash;&gt;
                     <div class="form-group">
                         <label for="phone">Phone</label>
                         <input type="text" class="form-control" id="phone" name="phone"/>
-                    </div>
+                    </div>-->
 
                     <!--密码-->
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" class="form-control"
-                               id="password" name="password"/>
+                               id="password" name="userPassword"/>
                     </div>
                     <!--提交按钮-->
                     <button type="submit" class="btn btn-default">注册</button>
@@ -81,6 +82,7 @@
                     </p>
 
                 </form>
+
             </div>
         </div>
 

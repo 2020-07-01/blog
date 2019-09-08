@@ -29,6 +29,7 @@
         <div th:each="article:${articleList}">
 
             <div class="panel panel-default">
+
                 <div class="panel-heading">
                     <h3 class="panel-title" th:text="${article.title}"></h3>
                 </div>
@@ -39,6 +40,10 @@
                     <p><a class="btn btn-large btn-default" th:href="@{'/article/detail/'+${article.aId}}"
                           role="button">阅读全文</a></p>
                 </div>
+
+                <div class="panel-footer">评论、点赞功能待开发</div>
+
+
             </div>
         </div>
     </div>

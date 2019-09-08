@@ -1,6 +1,5 @@
 package com.example.blog.entity;
 
-import javax.validation.constraints.NotNull;
 
 /**
  * @author :qiang
@@ -11,35 +10,18 @@ import javax.validation.constraints.NotNull;
 
 public class User {
 
-    private String userId;
-
-    /*
-     * desc：用户名
-     * length：24
-     * notNull：false
-     * dataType:String
-     */
+    private String uuid;
     private String userName;
-
-    /*
-     * desc：用户密码
-     * length：24
-     * notNull：false
-     * dataType:String
-     *
-     */
-    private String password;
-
-
+    private String userPassword;
     private String registerDate;
+    private String editDate;
 
-
-    public String getUserId() {
-        return userId;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
     public String getUserName() {
@@ -50,12 +32,12 @@ public class User {
         this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUserPassword() {
+        return userPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
     public String getRegisterDate() {
@@ -66,14 +48,22 @@ public class User {
         this.registerDate = registerDate;
     }
 
+    public String getEditDate() {
+        return editDate;
+    }
+
+    public void setEditDate(String editDate) {
+        this.editDate = editDate;
+    }
 
     @Override
     public String toString() {
         return "User{" +
-                "userId='" + userId + '\'' +
+                "uuid='" + uuid + '\'' +
                 ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
+                ", userPassword='" + userPassword + '\'' +
                 ", registerDate='" + registerDate + '\'' +
+                ", editDate='" + editDate + '\'' +
                 '}';
     }
 }

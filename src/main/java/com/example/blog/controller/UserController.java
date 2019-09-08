@@ -2,11 +2,9 @@ package com.example.blog.controller;
 
 import com.example.blog.entity.Article;
 import com.example.blog.entity.Category;
-import com.example.blog.entity.User;
 import com.example.blog.service.ArticleService;
 import com.example.blog.service.CategoryService;
 import com.example.blog.service.UserService;
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -15,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;

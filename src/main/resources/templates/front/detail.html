@@ -10,7 +10,6 @@
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
 </head>
 <body>
 
@@ -36,12 +35,21 @@
                 </div>
 
                 <div class="panel-footer">
-                    待更新
+                    点赞、评论功能代开发
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 </body>
+
+<script src="https://cdn.bootcss.com/showdown/1.3.0/showdown.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var content = $(".panel-body").text(); //获取md文本内容
+        var converter = new showdown.Converter(); //初始化转换器
+        var htmlcontent = converter.makeHtml(content); //将MarkDown转为html格式的内容
+        $(".panel-body").html(htmlcontent);
+    });
+</script>
 </html>
