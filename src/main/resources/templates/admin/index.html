@@ -12,7 +12,6 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
-<body>
 
 <!--删除博客提示信息-->
 <script type="text/javascript">
@@ -24,6 +23,48 @@
         }
     }
 </script>
+
+<!--ajax异步信息更新-->
+<script type="text/javascript">
+    function register() {
+
+        //获取博客的id
+        var aid = $("#aid").val();
+
+        var articleMessage = {
+            "aId": aid,
+
+        };
+
+        //转换为json格式的字符串
+        var datajson = JSON.stringify(articleMessage);
+
+        $.ajax({
+            type: "post",//提交方法
+            url: "/admin/delete", //地址
+            data: datajson,
+            //dataType: "json",//预期的服务器响应的类型
+            contentType: "application/json;charset=utf-8",//指定json字符串格式
+
+            //注册成功后进入登陆界面
+            success: function (result) {
+                //此时传递过来的为json对象,通过[]的方式获取value值
+                alert(result["errorMessage"]);
+
+                if (result["code"] == "005") {
+                    window.location.href = "/admin/index";
+                }
+            },
+            error: function () {
+                alert("不好意思，服务器跑到火星去了，登陆异常！");
+            }
+        });
+    }
+</script>
+
+
+
+<body>
 <!--引入头部-->
 <div class="container" th:include="common/head :: top"></div>
 
@@ -46,13 +87,11 @@
                         <th>发表时间</th>
                         <th>操作</th>
                     </tr>
-
                     </thead>
-
                     <tbody>
 
                     <tr th:each="article:${pageInfo.list}">
-                        <td th:text="${article.aId}"></td>
+                        <td id = "aid" th:text="${article.aId}"></td>
                         <td th:text="${article.title}"></td>
                         <td th:text="${article.summary}"></td>
                         <td th:text="${article.createDate}"></td>
@@ -61,8 +100,9 @@
                                 <button type="button" class="btn btn-sm">修改</button>
                             </a>
                             <label>&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                            <a onclick="return del()" th:href="@{/admin/delete (aId = ${article.aId})}">
-                                <button type="button" class="btn btn-sm">删除</button>
+
+                            <a onclick="return del()">
+                                <button  onclick="register()" class="btn btn-sm">删除</button>
                             </a>
                         </td>
 
@@ -81,7 +121,6 @@
                                 th:text="${pageInfo.total}"></span> 条记录</p>
                 </div>
             </div>
-
 
             <div class="col-md-6 column">
                 <ul class="pagination" style="float:right">

@@ -6,19 +6,65 @@
     <!--会禁用其缩放功能-->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1 ">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-
     <title>用户登陆</title>
-
     <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
+
+<!--ajax异步信息更新-->
+<script type="text/javascript">
+    function register() {
+        //获取用户输入
+        var userName = $("#userName").val();
+        var password = $("#password").val();
+
+        var user = {
+            "userName": userName,
+            "password": password
+        };
+
+        //转换为json格式的字符串
+        var datajson = JSON.stringify(user);
+
+        if (!userName) {
+            alert("用户名必填!");
+            $("#name").focus();//获取焦点
+            return;
+        }
+        if (!password) {
+            alert("密码必填!");
+            $("#password").focus();//获取焦点
+            return;
+        }
+
+        $.ajax({
+            type: "post",//提交方法
+            url: "/adminUser/dologin",//地址
+            data: datajson,
+            //dataType: "json",//预期的服务器响应的类型
+            contentType: "application/json;charset=utf-8",//指定json字符串格式
+
+            //注册成功后进入登陆界面
+            success: function (result) {
+                if (result["code"] == "000") {
+                    window.location.href = "/admin/index";
+                } else {
+
+                    //此时传递过来的为json对象,通过[]的方式获取value值
+                    alert(result["errorMessage"]);
+                }
+            },
+            error: function () {
+                alert("不好意思，服务器跑到火星去了，登陆异常！");
+            }
+        });
+    }
+</script>
 <body>
 
-
 <div class="container">
-
     <div class="row clearfix">
         <div class="col-md-12 column">
             <div class="page-header">
@@ -30,9 +76,7 @@
         </div>
     </div>
 
-
     <div class="row clearfix">
-
         <div class="col-md-6 column">
             <!--描述信息-->
             <div class="jumbotron">
@@ -55,28 +99,27 @@
 
         <div class="col-md-5 column">
             <div class="jumbotron">
-                <form role="form" action="/adminUser/dologin" method="post">
+                <form role="form">
                     <!--用户名-->
                     <div class="form-group">
 
                         <label for="userName">UserName</label>
-                        <input type="text" class="form-control" id="userName" name="userName"/>
+                        <input type="text" class="form-control" id="userName" name="userName" placeholder="请输入用户名"/>
                     </div>
 
                     <!--密码-->
                     <div class="form-group">
-                        <label for="userPassword">Password</label>
+                        <label for="password">Password</label>
                         <input type="password" class="form-control"
-                               id="userPassword" name="userPassword"/>
+                               id="password" name="Password" placeholder="请输入密码"/>
                     </div>
                     <!--提交按钮-->
-                    <button type="submit" class="btn btn-default">登陆</button>
-
-                    <p>
-                        如果您是新用户请先<a th:href="@{/adminUser/register}">注册</a>
-                    </p>
-
                 </form>
+
+                <button type="submit" class="btn btn-default" onclick="register()">登录</button>
+                <p>
+                    如果您是新用户请先<a th:href="@{/adminUser/register}">注册</a>
+                </p>
             </div>
         </div>
 

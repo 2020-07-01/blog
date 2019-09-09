@@ -15,12 +15,20 @@
 
 </head>
 
-
+<!--ajax异步信息更新-->
 <script type="text/javascript">
     function register() {
         //获取用户输入
         var userName = $("#userName").val();
         var password = $("#password").val();
+
+        var user = {
+            "userName": userName,
+            "password": password
+        };
+
+        //转换为json格式的字符串
+        var datajson = JSON.stringify(user);
 
         if (!userName) {
             alert("用户名必填!");
@@ -33,6 +41,25 @@
             return;
         }
 
+        $.ajax({
+            type: "post",//提交方法
+            url: "/adminUser/toregister",//地址
+            data: datajson,
+            //dataType: "json",//预期的服务器响应的类型
+            contentType: "application/json;charset=utf-8",//指定json字符串格式
+
+            //注册成功后进入登陆界面
+            success: function (result) {
+                //此时传递过来的为json对象,通过[]的方式获取value值
+                alert(result["errorMessage"]);
+                if (result["code"] == "001") {
+                    window.location.href = "/admin/login";
+                }
+            },
+            error: function () {
+                alert("不好意思，服务器跑到火星去了，登陆异常！");
+            }
+        });
     }
 </script>
 
@@ -75,11 +102,12 @@
         <div class="col-md-5 column">
             <div class="jumbotron">
 
-                <form role="form" action="/adminUser/toregister" method="post">
+                <form role="form">
                     <!--用户名-->
                     <div class="form-group">
                         <label for="userName">UserName</label>
-                        <input type="text" class="form-control" id="userName" name="userName"/>
+                        <input type="text" class="form-control" id="userName" placeholder="0-20个字符,可包含特殊字符!"
+                               name="userName"/>
                     </div>
                     <!--
                                         &lt;!&ndash;手机号&ndash;&gt;
@@ -92,17 +120,15 @@
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" class="form-control"
-                               id="password" name="userPassword"/>
+                               id="password" name="userPassword" placeholder="6-20位,只能且必包含数字和字母,不能以数字开头!"/>
                     </div>
-                    <!--提交按钮-->
-                    <button type="submit" onclick="register()" class="btn btn-default">注册</button>
-
-                    <p>
-                        如果您已注册请<a th:href="@{/admin/login}">登陆</a>
-                    </p>
 
                 </form>
-
+                <!--提交按钮-->
+                <button onclick="register()" class="btn btn-default">注册</button>
+                <p>
+                    如果您已注册请<a th:href="@{/admin/login}">登陆</a>
+                </p>
             </div>
         </div>
 
