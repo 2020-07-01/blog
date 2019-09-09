@@ -125,7 +125,6 @@ public class UserController {
         //获取与键关联的值
         String aId = object.getString("aId");
 
-
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("yq")) {
                 articleService.deleteBlog(aId);

@@ -31,7 +31,7 @@ public class ArticleController {
         Article article = articleService.selectById(aId);
         model.addAttribute("article", article);
 
-        return "front/detail";
+        return "special/detail";
     }
 
 
@@ -51,7 +51,7 @@ public class ArticleController {
 
         model.addAttribute("articleList", articleList);
 
-        return "front/columnPage";
+        return "special/columnPage";
     }
 
     //头部的查寻功能
@@ -60,12 +60,13 @@ public class ArticleController {
 
         List<Article> articleList = articleService.search(key);
 
-        for (Article article : articleList) {
-            System.out.println(article.toString());
+        if (articleList.isEmpty()) {
+            return "special/columnPage1";
         }
+
         model.addAttribute("articleList", articleList);
 
-        return "front/columnPage";
+        return "special/columnPage";
     }
 
 
