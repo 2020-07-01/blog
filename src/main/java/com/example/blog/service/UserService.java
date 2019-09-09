@@ -1,6 +1,7 @@
 package com.example.blog.service;
 
 import com.example.blog.entity.User;
+import com.example.blog.errorCode.ErrorCode;
 
 public interface UserService {
 
@@ -8,10 +9,7 @@ public interface UserService {
     boolean getUser(String userName, String password);
 
     // 注册用户信息
-    boolean registerUser(User user);
-
-    //根据用户名查询用户信息
-    boolean selectUser(String userName);
+    ErrorCode registerUser(User user);
 
 
 }
