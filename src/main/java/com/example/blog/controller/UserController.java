@@ -2,16 +2,20 @@ package com.example.blog.controller;
 
 import com.example.blog.entity.Article;
 import com.example.blog.entity.Category;
+import com.example.blog.errorCode.ErrorCode;
+import com.example.blog.errorCode.ErrorCodes;
 import com.example.blog.service.ArticleService;
 import com.example.blog.service.CategoryService;
 import com.example.blog.service.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -101,27 +105,34 @@ public class UserController {
         return "admin/write";
     }
 
-
     /**
      * 删除博客模块
      * 删除博客时要根据cookie判断用户是否有权限
      *
-     * @param aId：接受前端返回的博客id
+     * @param articleMessage：接受前端返回的博客id
      * @return ：重定向到index页面
      */
+    @ResponseBody
     @RequestMapping(value = "/delete")
-    public String deleteBlog(@RequestParam("aId") String aId
+    public ErrorCode deleteBlog(@RequestBody String articleMessage
             , HttpServletResponse response
             , HttpServletRequest request) {
 
+        //获取cookie
         Cookie[] cookies = request.getCookies();
+        //将string转换为静态的JSONObject
+        JSONObject object = JSONObject.fromObject(articleMessage);
+        //获取与键关联的值
+        String aId = object.getString("aId");
+
+
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("yq")) {
                 articleService.deleteBlog(aId);
-                return "redirect:/admin/index";
+                return ErrorCodes.CODE_005;
             }
         }
-        return "other/errorcard";
+        return ErrorCodes.CODE_004;
 
     }
 
@@ -134,6 +145,7 @@ public class UserController {
      */
     @RequestMapping(value = "/updateBlog")
     public String updateBlog(@RequestParam("aId") String aId, Model model) {
+        System.out.println(aId);
         //根据id查询要修改的博客
         Article article = articleService.selectById(aId);
         log.info("article数据：" + article.toString());

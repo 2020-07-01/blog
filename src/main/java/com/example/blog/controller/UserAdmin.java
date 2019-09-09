@@ -30,7 +30,7 @@ public class UserAdmin {
 
     // 创建日志实例
     private final static Logger log = LoggerFactory.getLogger(UserAdmin.class.getName());
-
+    //创建cookie
     Cookie cookie;
 
     @Autowired
@@ -54,44 +54,41 @@ public class UserAdmin {
      * @return
      */
     @RequestMapping(value = "/toregister")
-    public String toRegister(User user) {
-      /*  System.out.println(userMessage);
+    @ResponseBody
+    public ErrorCode toRegister(@RequestBody String userMessage) {
+
         //将string转换为静态的JSONObject
         JSONObject object = JSONObject.fromObject(userMessage);
         //获取与键关联的值
         String userName = object.getString("userName");
         String password = object.getString("password");
 
-        //此处应该先对用户名和用户进行验证
-*/
+        User user = new User(userName, password);
+        //注册用户
+        ErrorCode result = userService.registerUser(user);
 
-        //先查询用户名是否重复
-        if (userService.selectUser(user.getUserName())) {
-            return "redirect:/adminUser/register";
-        }
-        //如果用户名不存在则进行插入
-        else {
-            boolean result = userService.registerUser(user);
-            if (result) {
-                log.info("用户：" + user.getUserName() + "注册成功");
-                return "redirect:/admin/login";
-            } else {
-                return "redirect:/adminUser/register";
-            }
-        }
-
+        return result;
     }
-
 
     /**
      * 登陆验证模块，验证成功后跳转至后台主页,否则跳转到登陆界面
      *
-     * @param user
+     * @param userMessage
      * @return
      */
     @RequestMapping(value = "/dologin", method = RequestMethod.POST)
-    public String doLogin(User user, HttpServletResponse response, HttpServletRequest request) {
-        log.info("接受用户输入的用户名和密码：" + user.toString());
+    @ResponseBody
+    public ErrorCode doLogin(@RequestBody String userMessage, HttpServletResponse response, HttpServletRequest request) {
+        log.info("接受用户输入的用户名和密码：" + userMessage);
+
+        //将string转换为静态的JSONObject
+        JSONObject object = JSONObject.fromObject(userMessage);
+        //获取与键关联的值
+        String userName = object.getString("userName");
+        String password = object.getString("password");
+
+        User user = new User(userName, password);
+
         //如果可以获取到用户名和密码则成功否则失败
         if (userService.getUser(user.getUserName(), user.getUserPassword())) {
             log.info("用户验证成功");
@@ -110,13 +107,12 @@ public class UserAdmin {
             //加入cookie
             response.addCookie(cookie);
 
-            return "redirect:/admin/index";
+            return ErrorCodes.CODE_000;
         } else {
             log.info("用户验证失败");
-            return "admin/login";
+            return ErrorCodes.CODE_011;
         }
     }
-
 
     //退出登陆操作
     @RequestMapping(value = "/logout")
