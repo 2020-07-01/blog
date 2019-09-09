@@ -70,7 +70,7 @@
         <div class="col-md-12 column">
             <div class="page-header">
                 <h1>
-                   Hello, world!
+                    Hello, world!
                     <small>this is debug!</small>
                 </h1>
             </div>
@@ -109,25 +109,18 @@
                         <input type="text" class="form-control" id="userName" placeholder="0-20个字符,可包含特殊字符!"
                                name="userName"/>
                     </div>
-                    <!--
-                                        &lt;!&ndash;手机号&ndash;&gt;
-                                        <div class="form-group">
-                                            <label for="phone">Phone</label>
-                                            <input type="text" class="form-control" id="phone" name="phone"/>
-                                        </div>-->
 
-                    <!--密码-->
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" class="form-control"
                                id="password" name="userPassword" placeholder="6-20位,只能且必包含数字和字母,不能以数字开头!"/>
                     </div>
-
                 </form>
+
                 <!--提交按钮-->
                 <button onclick="register()" class="btn btn-default">注册</button>
                 <p>
-                    如果您已注册请<a th:href="@{/admin/login}">登陆</a>
+                    如果您已注册请<a th:href="@{/admin/login}">登录</a>
                 </p>
             </div>
         </div>

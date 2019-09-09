@@ -1,5 +1,7 @@
 package com.example.blog.errorCode;
 
+import javax.lang.model.type.ErrorType;
+
 /**
  * @author :qiang
  * @date :2019/9/8 下午9:18
@@ -20,4 +22,9 @@ public class ErrorCodes {
     public static final ErrorCode CODE_009 = new ErrorCode("009", "用户密码必须同时包含字母和数字!");
     public static final ErrorCode CODE_010 = new ErrorCode("010", "用户密码不能包含特殊字符!");
     public static final ErrorCode CODE_011 = new ErrorCode("011", "用户名或秘密错误!");
-}
+    public static final ErrorCode CODE_012 = new ErrorCode("012", "请选择类别!");
+    public static final ErrorCode CODE_013 = new ErrorCode("013","博客内容不能为空!");
+    public static final ErrorCode CODE_014 = new ErrorCode("014","博客标题不能为空!");
+    public static final ErrorCode CODE_111 = new ErrorCode("111","");
+
+ }

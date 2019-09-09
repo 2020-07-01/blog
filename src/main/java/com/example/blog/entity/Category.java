@@ -32,6 +32,17 @@ public class Category {
      */
     private String displayName;
 
+
+    public Category() {
+
+    }
+
+    public Category(String cId, String categoryName, String displayName) {
+        this.cId = cId;
+        this.categoryName = categoryName;
+        this.displayName = displayName;
+    }
+
     public String getcId() {
         return cId;
     }

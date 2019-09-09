@@ -96,13 +96,17 @@ public class UserController {
     public String write(Model model, HttpServletRequest request, HttpServletResponse response) {
         //获取请求中的cookie数组
         Cookie[] cookie = request.getCookies();
+        if (cookie != null) {
+            //查询所有的类别信息传送到前端
+            List<Category> categories = categoryService.selectAll();
+            model.addAttribute("categories", categories);
+            model.addAttribute("article1", new Article());//传入一个空对象
+            return "admin/write";
 
-        //查询所有的类别信息传送到前端
-        List<Category> categories = categoryService.selectAll();
-        model.addAttribute("categories", categories);
-        model.addAttribute("article1", new Article());//传入一个空对象
+        } else {
+            return "admin/login";
+        }
 
-        return "admin/write";
     }
 
     /**
@@ -144,7 +148,7 @@ public class UserController {
      */
     @RequestMapping(value = "/updateBlog")
     public String updateBlog(@RequestParam("aId") String aId, Model model) {
-        System.out.println(aId);
+
         //根据id查询要修改的博客
         Article article = articleService.selectById(aId);
         log.info("article数据：" + article.toString());
@@ -174,14 +178,18 @@ public class UserController {
     /**
      * 保存博客模块
      *
-     * @param article
+     * @param
      * @return
      */
     @RequestMapping(value = "/save")
-    public String save(Article article) {
+    @ResponseBody
+    public ErrorCode save(@RequestBody String articleMessage, HttpServletRequest request, HttpServletResponse response) {
+
+
         //保存博客信息
-        articleService.saveBlog(article);
-        return "redirect:/admin/index";
+        ErrorCode errorCode = articleService.saveBlog(articleMessage);
+        return errorCode;
+
     }
 
 

@@ -2,19 +2,19 @@ package com.example.blog.service.impl;
 
 import com.example.blog.dao.ArticleDao;
 import com.example.blog.entity.Article;
+import com.example.blog.errorCode.ErrorCode;
+import com.example.blog.errorCode.ErrorCodes;
 import com.example.blog.service.ArticleService;
+import com.example.blog.support.CategoryObject;
 import com.example.blog.support.DateSupport;
 import com.example.blog.support.UUIDSupport;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-
 
 /**
  * @author :qiang
@@ -25,7 +25,7 @@ import java.util.List;
 @Service
 public class ArticleServiceImpl implements ArticleService {
 
-
+    //创建日志实例
     protected final static Logger log = LoggerFactory.getLogger(ArticleServiceImpl.class.getName());
 
 
@@ -70,8 +70,32 @@ public class ArticleServiceImpl implements ArticleService {
         return articleDao.selectById(id);
     }
 
-    //保存博客信息
-    public int saveBlog(Article article) {
+
+    public ErrorCode saveBlog(String articleMessage) {
+
+        //将string转换为静态的JSONObject
+        JSONObject object = JSONObject.fromObject(articleMessage);
+        //获取与键关联的值
+        String cId = object.getString("cId");
+        String content = object.getString("content");
+        String title = object.getString("title");
+
+        System.out.println(cId + content + title);
+
+        if (cId.equals("")) {
+            return ErrorCodes.CODE_012;
+        }
+        if (title.equals("")) {
+            return ErrorCodes.CODE_014;
+        }
+        if (content.equals("")) {
+            return ErrorCodes.CODE_013;
+        }
+
+        Article article = new Article();
+        article.setTitle(title);
+        article.setContent(content);
+        article.setCategory(CategoryObject.category1);
         //设置aId
         article.setaId(UUIDSupport.getUUID());
         //取前40个字符为摘要,否则整个文章为摘要
@@ -84,7 +108,7 @@ public class ArticleServiceImpl implements ArticleService {
         article.setCreateDate(DateSupport.getDate());
         int row = articleDao.saveBlog(article);
         log.info("保存成功");
-        return row;
+        return ErrorCodes.CODE_000;
     }
 
     @Override

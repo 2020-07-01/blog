@@ -51,9 +51,49 @@
             }
         }
     </style>
-
-
 </head>
+
+<!--ajax异步信息更新-->
+<script type="text/javascript">
+    function register() {
+
+        var cId = $("#cId").val();//获取博客cId
+        var content = $("#content").val();//获取博客内容
+        var title = $("#title").val();
+
+        var article = {
+            "cId": cId,
+            "content": content,
+            "title": title
+        };
+
+        //转换为json格式的字符串
+        var datajson = JSON.stringify(article);
+
+        $.ajax({
+            type: "post",//提交方法
+            url: "/admin/save",//地址
+            data: datajson,
+            //dataType: "json",//预期的服务器响应的类型
+            contentType: "application/json;charset=utf-8",//指定json字符串格式
+
+            //注册成功后进入登陆界面
+            success: function (result) {
+
+                if (result["code"] == "000") {
+                    window.location.href = "/admin/index";
+                } else {
+                    //此时传递过来的为json对象,通过[]的方式获取value值
+                    alert(result["errorMessage"]);
+                }
+            },
+            error: function () {
+                alert("不好意思，服务器跑到火星去了，登陆异常！");
+            }
+        });
+    }
+</script>
+
 <body>
 <!--引入首部部分-->
 <div th:include="common/head :: top"></div>
@@ -63,7 +103,7 @@
 <div class="container">
     <div class="row clearfix">
 
-        <form class="form-horizontal" role="form" method="post" th:action="@{/admin/save}" th:object="${article1}">
+        <form class="form-horizontal" role="form" method="post" th:object="${article1}">
 
             <!--此标签不进行显示-->
             <input style="display: none" name="cId" id="cId" type="text"
@@ -109,9 +149,8 @@
                     </div>
 
                     <div class="col-md-1 column">
-                        <button type="submit" role="button" class="btn btn-default">发表博客</button>
+                        <button type="submit" role="button" class="btn btn-default" onclick="register()">发表博客</button>
                     </div>
-
 
                 </div>
                 <div class="row clearfix">
@@ -125,7 +164,8 @@
                     <div class="col-md-12 column">
 
                         <div id="test-editormd">
-                            <textarea style="display:none;" name="content" th:field="*{content}"></textarea>
+                            <textarea style="display:none;" name="content" id="content"
+                                      th:field="*{content}"></textarea>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 package com.example.blog.service;
 
 import com.example.blog.entity.Article;
+import com.example.blog.errorCode.ErrorCode;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface ArticleService {
     Article selectById(String aId);
 
     //保存博客信息
-    int saveBlog(Article article);
+    ErrorCode saveBlog(String articleMessage);
 
     //根据key进行搜索
     List<Article> search(String key);
