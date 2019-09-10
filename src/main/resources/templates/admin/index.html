@@ -112,7 +112,7 @@
                     <tr th:each="article:${pageInfo.list}">
                         <td th:text="${article.aId}"></td>
                         <td><span th:text="${article.title}"></span></td>
-                        <td th:text="${article.summary}" ></td>
+                        <td th:text="${article.summary}"></td>
                         <td th:text="${article.createDate}"></td>
                         <td>
                             <a th:href="@{/admin/updateBlog (aId = ${article.aId})}">
@@ -121,7 +121,7 @@
                             <label>&nbsp;&nbsp;&nbsp;&nbsp;</label>
 
                             <a>
-                                <button th:name="${article.aId}" onclick="del(this)"  class="btn btn-sm">删除</button>
+                                <button th:name="${article.aId}" onclick="del(this)" class="btn btn-sm">删除</button>
                             </a>
                         </td>
 

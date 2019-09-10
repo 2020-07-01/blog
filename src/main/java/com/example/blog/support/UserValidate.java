@@ -20,7 +20,7 @@ public class UserValidate {
      */
     public static ErrorCode userNameValidate(String userName) {
 
-        if (userName.length() > 20) {
+        if (userName.length() > 12) {
             return ErrorCodes.CODE_006;
         } else {
             return ErrorCodes.CODE_000;//验证通过
@@ -44,9 +44,9 @@ public class UserValidate {
         boolean containLetter = false;//包含字母标志
         boolean legalLength = false;//长度是否合法
         boolean legalFirst = true;//首字母是否合法
-        boolean containSpechars = true;//是否包含特殊字符
+        boolean containSpechars = false;//是否包含特殊字符
         //验证密码长度
-        if (length >= 6 && length <= 20) {
+        if (length >= 6 && length <= 12) {
             legalLength = true;
         }
         //验证首字母
@@ -74,20 +74,27 @@ public class UserValidate {
             //验证是否包含特殊字符
             if (!containSpechars) {
                 if (password_char[i] < 48 || password_char[i] > 122) {
-                    containSpechars = false;
+                    containSpechars = true;
                 }
                 if (password_char[i] > 57 & password_char[i] < 65) {
-                    containSpechars = false;
+                    containSpechars = true;
                 }
                 if (password_char[i] > 90 & password_char[i] < 97) {
-                    containSpechars = false;
+                    containSpechars = true;
                 }
             }
         }
 
+
+        System.out.println(containLetter);
+        System.out.println(containNumber);
+        System.out.println(legalFirst);
+        System.out.println(legalLength);
+        System.out.println(!containSpechars);
+
         //验证通过
-        if (containLetter && containNumber && legalFirst && legalLength && !containSpechars) {
-            return ErrorCodes.CODE_000;
+        if (containSpechars) {
+            return ErrorCodes.CODE_010;
         } else if (!legalFirst) {
             return ErrorCodes.CODE_008;
         } else if (!legalLength) {
@@ -95,7 +102,7 @@ public class UserValidate {
         } else if (!containNumber || !containLetter) {
             return ErrorCodes.CODE_009;
         } else {
-            return ErrorCodes.CODE_010;
+            return ErrorCodes.CODE_000;
         }
     }
 

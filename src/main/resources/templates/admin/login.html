@@ -104,14 +104,16 @@
                     <div class="form-group">
 
                         <label for="userName">UserName</label>
-                        <input type="text" class="form-control" id="userName" name="userName" placeholder="请输入用户名"/>
+                        <input type="text" class="form-control" id="userName" name="userName" maxlength="16"
+                               autocomplete="off"
+                               placeholder="请输入用户名"/>
                     </div>
 
                     <!--密码-->
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" class="form-control"
-                               id="password" name="Password" placeholder="请输入密码"/>
+                               id="password" name="Password" autocomplete="off" maxlength="16" placeholder="请输入密码"/>
                     </div>
                     <!--提交按钮-->
                 </form>

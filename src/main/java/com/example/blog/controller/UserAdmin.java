@@ -56,7 +56,7 @@ public class UserAdmin {
     @RequestMapping(value = "/toregister")
     @ResponseBody
     public ErrorCode toRegister(@RequestBody String userMessage) {
-
+        log.info("用户名和密码为：" + userMessage);
         //将string转换为静态的JSONObject
         JSONObject object = JSONObject.fromObject(userMessage);
         //获取与键关联的值

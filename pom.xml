@@ -61,11 +61,13 @@
             <version>1.4.1</version>
         </dependency>
 
-        <!--&lt;!&ndash;添加spring secutiry的支持&ndash;&gt;
+        <!--加密依赖-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>-->
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+
 
         <!--添加分页插件-->
         <dependency>
