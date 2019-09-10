@@ -6,10 +6,10 @@ import com.example.blog.errorCode.ErrorCodes;
 /**
  * @author :qiang
  * @date :2019/9/9 上午11:01
- * @description : 验证机制
+ * @description : 用户信息验证机制
  * @other :
  */
-public class Validate {
+public class UserValidate {
 
     /**
      * 用户名验证

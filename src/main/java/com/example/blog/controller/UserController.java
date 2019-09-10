@@ -189,7 +189,6 @@ public class UserController {
     @ResponseBody
     public ErrorCode save(@RequestBody String articleMessage, HttpServletRequest request, HttpServletResponse response) {
 
-
         //保存博客信息
         ErrorCode errorCode = articleService.saveBlog(articleMessage);
         return errorCode;

@@ -7,7 +7,7 @@ import com.example.blog.errorCode.ErrorCodes;
 import com.example.blog.service.UserService;
 import com.example.blog.support.DateSupport;
 import com.example.blog.support.UUIDSupport;
-import com.example.blog.support.Validate;
+import com.example.blog.support.UserValidate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,12 +66,12 @@ public class UserServiceImpl implements UserService {
         }
 
         //首先对用户名和用户密码进行验证
-        ErrorCode errorCode1 = Validate.userNameValidate(user.getUserName());
+        ErrorCode errorCode1 = UserValidate.userNameValidate(user.getUserName());
         if (errorCode1.getCode().equals("006")) {
             return ErrorCodes.CODE_006;
         }
 
-        ErrorCode errorCode = Validate.passwordValidate(user.getUserPassword());
+        ErrorCode errorCode = UserValidate.passwordValidate(user.getUserPassword());
 
         if (errorCode.getCode().equals("008")) {
             return ErrorCodes.CODE_008;

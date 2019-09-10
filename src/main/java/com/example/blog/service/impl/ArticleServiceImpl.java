@@ -87,18 +87,16 @@ public class ArticleServiceImpl implements ArticleService {
         String content = object.getString("content");
         String title = object.getString("title");
 
-
         Article article = new Article();
         article.setTitle(title);
         article.setContent(content);
-
         article.setCategory(category(cId));
 
         //设置aId
         article.setaId(UUIDSupport.getUUID());
         //取前40个字符为摘要,否则整个文章为摘要
-        if (article.getContent().length() > 40) {
-            article.setSummary(article.getContent().substring(0, 40));
+        if (article.getContent().length() > 18) {
+            article.setSummary(article.getTitle().substring(0, 18));
         } else {
             article.setSummary(article.getContent());
         }
@@ -109,7 +107,9 @@ public class ArticleServiceImpl implements ArticleService {
         return ErrorCodes.CODE_000;
     }
 
+    //
 
+    //根据id值返回Category实例对象
     private Category category(String cId) {
 
         if (cId.equals("1")) {

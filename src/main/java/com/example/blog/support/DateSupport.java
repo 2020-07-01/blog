@@ -15,7 +15,7 @@ public class DateSupport {
 
     //获取当前时间
     public static String getDate() {
-        DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        DateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return format1.format(new Date());
     }
 
