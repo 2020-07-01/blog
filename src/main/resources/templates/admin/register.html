@@ -53,7 +53,7 @@
                 //此时传递过来的为json对象,通过[]的方式获取value值
                 alert(result["errorMessage"]);
                 if (result["code"] == "001") {
-                    window.location.href = "/admin/login";
+                    window.location.href = "/blog";
                 }
             },
             error: function () {
@@ -70,7 +70,7 @@
         <div class="col-md-12 column">
             <div class="page-header">
                 <h1>
-                    Hello, world!
+                    Hello, world!&nbsp;&nbsp;
                     <small>this is debug!</small>
                 </h1>
             </div>
@@ -120,7 +120,7 @@
                 <!--提交按钮-->
                 <button onclick="register()" class="btn btn-default">注册</button>
                 <p>
-                    如果您已注册请<a th:href="@{/admin/login}">登录</a>
+                    如果您已注册请<a th:href="@{/blog}">登录</a>
                 </p>
             </div>
         </div>
@@ -133,7 +133,5 @@
 
 </body>
 </html>
-
-
 </body>
 </html>

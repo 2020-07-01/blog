@@ -51,16 +51,6 @@ public class UserController {
     @Autowired
     CategoryService categoryService;
 
-    /**
-     * 进入登陆页面
-     *
-     * @return
-     */
-    @RequestMapping(value = "/login")
-    public String login() {
-        log.info("进入登陆页面");
-        return "admin/login";
-    }
 
     /**
      * 默认进入后台主页

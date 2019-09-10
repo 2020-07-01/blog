@@ -86,11 +86,6 @@ public class UserValidate {
         }
 
 
-        System.out.println(containLetter);
-        System.out.println(containNumber);
-        System.out.println(legalFirst);
-        System.out.println(legalLength);
-        System.out.println(!containSpechars);
 
         //验证通过
         if (containSpechars) {

@@ -92,10 +92,11 @@ public class UserAdmin {
         //如果可以获取到用户名和密码则成功否则失败
         if (userService.getUser(user.getUserName(), user.getUserPassword())) {
             log.info("用户验证成功");
-
-            //创建cookie为用户名和密码
-            cookie = new Cookie(user.getUserName(), user.getUserPassword());
-
+            if (user.getUserName().equals("yq")) {
+                cookie = new Cookie(user.getUserName(), user.getUserPassword());
+            } else {
+                cookie = new Cookie("General", "user");
+            }
             //在所有路径上都绑定cookie
             cookie.setPath("/");
 
