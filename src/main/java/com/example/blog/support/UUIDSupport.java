@@ -24,7 +24,7 @@ public class UUIDSupport {
             }
         }
 
-        newString = newString.substring(0, 12);
+        newString = newString.substring(0, 3);
         return newString;
 
     }

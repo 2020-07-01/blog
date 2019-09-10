@@ -2,6 +2,7 @@ package com.example.blog.service.impl;
 
 import com.example.blog.dao.ArticleDao;
 import com.example.blog.entity.Article;
+import com.example.blog.entity.Category;
 import com.example.blog.errorCode.ErrorCode;
 import com.example.blog.errorCode.ErrorCodes;
 import com.example.blog.service.ArticleService;
@@ -71,6 +72,12 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
 
+    /**
+     * 保存博客
+     *
+     * @param articleMessage
+     * @return
+     */
     public ErrorCode saveBlog(String articleMessage) {
 
         //将string转换为静态的JSONObject
@@ -80,22 +87,13 @@ public class ArticleServiceImpl implements ArticleService {
         String content = object.getString("content");
         String title = object.getString("title");
 
-        System.out.println(cId + content + title);
-
-        if (cId.equals("")) {
-            return ErrorCodes.CODE_012;
-        }
-        if (title.equals("")) {
-            return ErrorCodes.CODE_014;
-        }
-        if (content.equals("")) {
-            return ErrorCodes.CODE_013;
-        }
 
         Article article = new Article();
         article.setTitle(title);
         article.setContent(content);
-        article.setCategory(CategoryObject.category1);
+
+        article.setCategory(category(cId));
+
         //设置aId
         article.setaId(UUIDSupport.getUUID());
         //取前40个字符为摘要,否则整个文章为摘要
@@ -109,6 +107,25 @@ public class ArticleServiceImpl implements ArticleService {
         int row = articleDao.saveBlog(article);
         log.info("保存成功");
         return ErrorCodes.CODE_000;
+    }
+
+
+    private Category category(String cId) {
+
+        if (cId.equals("1")) {
+            return CategoryObject.category1;
+        }
+        if (cId.equals("2")) {
+            return CategoryObject.category2;
+        }
+        if (cId.equals("3")) {
+            return CategoryObject.category3;
+        }
+        if (cId.equals("4")) {
+            return CategoryObject.category4;
+        } else {
+            return CategoryObject.category4;
+        }
     }
 
     @Override
