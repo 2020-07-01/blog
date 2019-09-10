@@ -13,6 +13,23 @@
 </head>
 
 
+<style>
+    table {
+        text-align: left;
+        table-layout: fixed;
+        word-break: break-all;
+    }
+
+    table td > span {
+        display: inline-block;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+</style>
+
 <!--删除博客提示信息-->
 <script type="text/javascript">
     function del() {
@@ -86,15 +103,16 @@
                         <th width="14%">发表时间</th>
                         <th width="13%">操作</th>
                     </tr>
+
                     </thead>
                     <tbody>
 
                     <tr th:each="article:${pageInfo.list}">
-                        <td width="5%" th:text="${article.aId}"></td>
-                        <td width="43%" th:text="${article.title}"></td>
-                        <td width="25%" th:text="${article.summary}"></td>
-                        <td width="14%" th:text="${article.createDate}"></td>
-                        <td width="13%">
+                        <td th:text="${article.aId}"></td>
+                        <td><span th:text="${article.title}"></span></td>
+                        <td th:text="${article.summary}"></td>
+                        <td th:text="${article.createDate}"></td>
+                        <td>
                             <a th:href="@{/admin/updateBlog (aId = ${article.aId})}">
                                 <button type="button" class="btn btn-sm">修改</button>
                             </a>

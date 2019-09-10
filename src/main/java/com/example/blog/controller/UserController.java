@@ -7,10 +7,10 @@ import com.example.blog.errorCode.ErrorCodes;
 import com.example.blog.service.ArticleService;
 import com.example.blog.service.CategoryService;
 import com.example.blog.service.UserService;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import net.sf.json.JSONObject;
-import org.omg.PortableServer.LIFESPAN_POLICY_ID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -75,9 +75,9 @@ public class UserController {
         if (request.getCookies() != null) {
             PageHelper.startPage(pageNum, pageSize);
             try {
-                List<Article> articleList1 = articleService.selectAll();
+                List<Article> articleList = articleService.selectAll();
 
-                List<Article>  articleList = articleList(articleList1);
+                //List<Article> articleList = articleList(articleList1);
 
                 PageInfo<Article> pageInfo = new PageInfo<>(articleList);
 
@@ -91,34 +91,6 @@ public class UserController {
         } else
             return "admin/login";
     }
-
-    private List<Article> articleList(List<Article> list) {
-
-        //创建新的list存储title
-        List<String> list1 = new ArrayList<String>();
-
-        for (int i = 0; i < list.size(); i++) {
-
-            list1.add(list.get(i).getTitle());
-        }
-
-        //遍历标题list
-        for (int i = 0; i < list1.size(); i++)//遍历标题
-        {
-            String newString = list1.get(i).substring(0, 33);
-
-            list1.set(i, newString);
-        }
-
-        //替换title
-        for (int i = 0; i < list.size(); i++) {
-
-            list.get(i).setTitle(list1.get(i));
-        }
-
-        return list;
-    }
-
 
     /**
      * 进入写博客界面
@@ -203,7 +175,6 @@ public class UserController {
      */
     @RequestMapping(value = "/update")
     public String update(Article article) {
-
         articleService.updateBlog(article);
         return "redirect:/admin/index";
     }
