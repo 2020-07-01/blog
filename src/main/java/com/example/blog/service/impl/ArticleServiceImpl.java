@@ -94,9 +94,15 @@ public class ArticleServiceImpl implements ArticleService {
 
         //设置aId
         article.setaId(UUIDSupport.getUUID());
-        //取前40个字符为摘要,否则整个文章为摘要
+        /**
+         * 取前18个字符为summary
+         */
         if (article.getContent().length() > 18) {
-            article.setSummary(article.getTitle().substring(0, 18));
+            if (article.getTitle().length() > 18) {
+                article.setSummary(article.getTitle().substring(0, 18));
+            } else {
+                article.setSummary(article.getTitle());
+            }
         } else {
             article.setSummary(article.getContent());
         }
@@ -107,7 +113,6 @@ public class ArticleServiceImpl implements ArticleService {
         return ErrorCodes.CODE_000;
     }
 
-    //
 
     //根据id值返回Category实例对象
     private Category category(String cId) {
@@ -128,6 +133,12 @@ public class ArticleServiceImpl implements ArticleService {
         }
     }
 
+    /**
+     * 通过关键字查询博客
+     *
+     * @param key
+     * @return
+     */
     @Override
     public List<Article> search(String key) {
         //获取Article列表
@@ -138,6 +149,12 @@ public class ArticleServiceImpl implements ArticleService {
         return articleList;
     }
 
+    /**
+     * 更新博客
+     *
+     * @param article
+     * @return
+     */
     @Override
     public int update(Article article) {
 

@@ -10,12 +10,13 @@ CREATE TABLE `user`
     `uuid`          varchar(24) NOT NULL COMMENT '用户id',
     `user_name`     varchar(24) NOT NULL COMMENT '用户名',
     `user_password` varchar(24) NOT NULL COMMENT '用户密码',
-    `phone`         varchar(11) NOT NULL COMMENT '手机号',
-    `create_date`   varchar(24) NOT NULL,
+    `register_date` varchar(24) NOT NULL DEFAULT 'null' COMMENT '注册时间',
     `edit_date`     varchar(24) NOT NULL,
-    PRIMARY KEY (`uuid`),unique (`user_name`)
+    PRIMARY KEY (`uuid`),
+    UNIQUE KEY `user_name` (`user_name`)
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8  
+  DEFAULT CHARSET = utf8;
+ 
 
 -- 创建博客表 --
 CREATE TABLE `article`
@@ -29,7 +30,7 @@ CREATE TABLE `article`
     `edit_date`   varchar(24) DEFAULT NULL COMMENT '修改时间',
     PRIMARY KEY (`a_id`)
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8 
+  DEFAULT CHARSET = utf8;
 
 -- 创建博客类型表 --
 CREATE TABLE `category`
@@ -39,8 +40,7 @@ CREATE TABLE `category`
     `display_name`  varchar(24) NOT NULL COMMENT '显示类型',
     PRIMARY KEY (`c_id`)
 ) ENGINE = InnoDB
-  DEFAULT CHARSET = utf8   
-
+  DEFAULT CHARSET = utf8;
 ```
 
 表结构设计：用户表user，博客表article，和类别表category
@@ -89,9 +89,8 @@ VALUES ('1', 'javaPage', 'Java专栏'),
 
 
 
-
-
-
+创建数据库：
+CREATE DATABASE `blog` CHARACTER SET utf8 ;
 
 
 # 问题
