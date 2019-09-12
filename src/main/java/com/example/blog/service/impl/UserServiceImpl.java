@@ -12,6 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author :qiang
@@ -36,6 +39,7 @@ public class UserServiceImpl implements UserService {
      * @return 验证成功返回true，失败返回false
      */
     @Override
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED)
     public boolean getUser(String userName, String password) {
 
         User user = userDao.selectUserByNP(userName, password);
@@ -58,6 +62,7 @@ public class UserServiceImpl implements UserService {
      * @return 注册成功返回true，失败返回false
      */
     @Override
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED)
     public ErrorCode registerUser(User user) {
 
         //判断用户名是否已经存在

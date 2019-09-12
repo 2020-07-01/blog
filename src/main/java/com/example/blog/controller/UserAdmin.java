@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLEncoder;
 
 /**
  * @author :qiang
@@ -92,10 +93,10 @@ public class UserAdmin {
         //如果可以获取到用户名和密码则成功否则失败
         if (userService.getUser(user.getUserName(), user.getUserPassword())) {
             log.info("用户验证成功");
-            if (user.getUserName().equals("yq")) {
-                cookie = new Cookie(user.getUserName(), user.getUserPassword());
-            } else {
-                cookie = new Cookie("General", "user");
+            try {
+                cookie = new Cookie(URLEncoder.encode(user.getUserName(), "UTF-8"), user.getUserPassword());
+            } catch (Exception e) {
+
             }
             //在所有路径上都绑定cookie
             cookie.setPath("/");

@@ -14,6 +14,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -36,6 +39,7 @@ public class ArticleServiceImpl implements ArticleService {
     /*
      * 查询所有的博客信息
      */
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED)
     public List<Article> selectAll() {
         List<Article> articleList = articleDao.selectAll();
         log.info("查询所有博客成功");
@@ -46,11 +50,13 @@ public class ArticleServiceImpl implements ArticleService {
     /*
      * 根据id删除博客
      */
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED)
     public int deleteBlog(String id) {
         return articleDao.deleteBlog(id);
     }
 
     //修改博客
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED)
     public int updateBlog(Article article) {
         article.setEditDate(DateSupport.getDate());
         //取前40个字符为摘要,否则整个文章为摘要
@@ -67,6 +73,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     //根据id查询博客
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED)
     public Article selectById(String id) {
         return articleDao.selectById(id);
     }
@@ -78,6 +85,7 @@ public class ArticleServiceImpl implements ArticleService {
      * @param articleMessage
      * @return
      */
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED)
     public ErrorCode saveBlog(String articleMessage) {
 
         //将string转换为静态的JSONObject
@@ -140,6 +148,7 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     @Override
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED)
     public List<Article> search(String key) {
         //获取Article列表
         List<Article> articleList = articleDao.search(key);
@@ -156,6 +165,7 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     @Override
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED)
     public int update(Article article) {
 
         //设置修改时间
@@ -168,6 +178,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     //根据category查询所有的博客
     @Override
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED, propagation = Propagation.REQUIRED)
     public List<Article> selectAllByCategory(String category) {
         List<Article> articleList = articleDao.selectAllByCategory(category);
 

@@ -7,7 +7,6 @@ import com.example.blog.errorCode.ErrorCodes;
 import com.example.blog.service.ArticleService;
 import com.example.blog.service.CategoryService;
 import com.example.blog.service.UserService;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import net.sf.json.JSONObject;
@@ -24,8 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.net.URLDecoder;
 import java.util.List;
 
 /**
@@ -66,8 +64,6 @@ public class UserController {
             PageHelper.startPage(pageNum, pageSize);
             try {
                 List<Article> articleList = articleService.selectAll();
-
-                //List<Article> articleList = articleList(articleList1);
 
                 PageInfo<Article> pageInfo = new PageInfo<>(articleList);
 
@@ -117,6 +113,8 @@ public class UserController {
             , HttpServletResponse response
             , HttpServletRequest request) {
 
+        System.out.println(articleMessage);
+
         //获取cookie
         Cookie[] cookies = request.getCookies();
         //将string转换为静态的JSONObject
@@ -124,12 +122,17 @@ public class UserController {
         //获取与键关联的值
         String aId = object.getString("aId");
 
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("yq")) {
-                articleService.deleteBlog(aId);
-                return ErrorCodes.CODE_005;
+        try {
+            for (Cookie cookie : cookies) {
+                if (URLDecoder.decode(cookie.getName(), "UTF-8").equals("yq")) {
+                    articleService.deleteBlog(aId);
+                    return ErrorCodes.CODE_005;
+                }
             }
+        } catch (Exception e) {
+
         }
+
         return ErrorCodes.CODE_004;
 
     }
@@ -156,6 +159,10 @@ public class UserController {
 
         return "admin/update";
     }
+
+
+
+
 
     /**
      * 更新博客
