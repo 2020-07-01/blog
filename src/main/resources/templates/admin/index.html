@@ -14,8 +14,8 @@
 
 
 <style>
+
     table {
-        text-align: left;
         table-layout: fixed;
         word-break: break-all;
     }
@@ -43,7 +43,7 @@
     }
 </script>
 
-<!--ajax异步信息更新-->
+<!--删除博客-->
 <script type="text/javascript">
     function register(obj) {
 
@@ -64,7 +64,7 @@
             //dataType: "json",//预期的服务器响应的类型
             contentType: "application/json;charset=utf-8",//指定json字符串格式
 
-            //注册成功后进入登陆界面
+
             success: function (result) {
                 //此时传递过来的为json对象,通过[]的方式获取value值
                 alert(result["errorMessage"]);
@@ -79,6 +79,8 @@
         });
     }
 </script>
+
+
 
 
 <body>
@@ -110,13 +112,13 @@
                     <tbody>
 
                     <tr th:each="article:${pageInfo.list}">
-                        <td th:text="${article.aId}"></td>
-                        <td><span th:text="${article.title}"></span></td>
-                        <td th:text="${article.summary}"></td>
-                        <td th:text="${article.createDate}"></td>
-                        <td>
+                        <td width="5%" th:text="${article.aId}"></td>
+                        <td width="43%" ><span th:text="${article.title}"></span></td>
+                        <td width="25%" th:text="${article.summary}"></td>
+                        <td width="14%" th:text="${article.createDate}"></td>
+                        <td width="13%" >
                             <a th:href="@{/admin/updateBlog (aId = ${article.aId})}">
-                                <button type="button" class="btn btn-sm">修改</button>
+                                <button type="button" class="btn btn-sm" onclick="del(this)">修改</button>
                             </a>
                             <label>&nbsp;&nbsp;&nbsp;&nbsp;</label>
 
@@ -124,9 +126,7 @@
                                 <button th:name="${article.aId}" onclick="del(this)" class="btn btn-sm">删除</button>
                             </a>
                         </td>
-
                     </tr>
-
                     </tbody>
                 </table>
             </div>
